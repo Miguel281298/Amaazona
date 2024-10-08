@@ -1,0 +1,144 @@
+:root {
+    /*custom propeties*/
+    --fondo: #243238;
+    --amarillo: #ffce00;
+    --amaOscuro: rgb(209, 167, 0);
+    --blanco: #ffffff;
+    --negro: #000000;
+    --fuentePrincipal: 'Staatliches', cursive;
+    --fuenteSlide: 'Poppins', sans-serif;
+}
+
+body {
+    align-items: center;
+}
+
+.logo {
+    margin: 1rem 3rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin: 0 2rem;
+}
+
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.producto {
+    background-color: var(--fondo);
+    padding: 1rem;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+}
+
+.producto__imagen {
+    overflow: hidden;
+    position: relative;
+}
+
+.producto__imagen img {
+    object-fit: cover;
+    transition: all 0.4s ease-out;
+    width: 100%;
+}
+
+.producto:hover .producto__imagen img {
+    transform: scale(1.30);
+}
+
+.producto__nombre {
+    font-size: 4rem;
+    color: var(--blanco);
+}
+
+.producto__precio {
+    font-size: 2.8rem;
+    color: var(--amarillo);
+}
+
+.producto__nombre,
+.producto__precio {
+    font-family: var(--fuentePrincipal);
+    text-align: center;
+    margin: 1rem 0;
+    line-height: 1.2;
+}
+
+.container { 
+    max-width: 300px;
+    width: 100%;
+}
+
+@media (min-width: 520px) {
+    .container {
+        max-width: 620px;
+    }
+}
+
+@media (min-width: 769px) {
+    .container {
+        max-width: 940px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .container {
+        max-width: 1100px;
+    }
+}
+
+.slide-container {
+    margin: 0 30px;
+    display: flex;
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+}
+
+.card .image-box {
+    height: 200px;
+}
+
+.card .image-box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px 8px 0 0;
+}
+
+.name-category {
+    font-family: var(--fuenteSlide);
+    font-size: 20px;
+    font-weight: 400; 
+    margin: 8px 0;
+}
+
+.swiper-navBtn {
+    height: 40px;
+    width: 40px;
+    background: #fff;
+    border-radius: 50px;
+}
+
+.movimiento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    padding-bottom: 50px;
+}

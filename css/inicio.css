@@ -1,0 +1,87 @@
+:root {
+    /*custom propeties*/
+    --fondo: #243238;
+    --amarillo: #ffce00;
+    --amaOscuro: rgb(209, 167, 0);
+    --blanco: #ffffff;
+    --negro: #000000;
+    --fuentePrincipal: 'Staatliches', cursive;
+}
+
+.header {
+    display: initial;
+    padding: 0.35rem 0;
+}
+
+.registro {
+    margin: 0 auto;
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.campos__datos {
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: bisque;
+    border-radius: 2rem;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+}
+
+.logo {
+    margin-top: 2rem;
+}
+
+.text-sesion {
+    margin: 0;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0.5rem;
+    font-family: var(--fuentePrincipal);
+}
+
+.campos__text {
+    width: 25rem;
+    padding: 1rem;
+    font-size: 2rem;
+    border-radius: 2rem;
+    border: none;
+    margin: 0.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+    .campos {
+        flex-direction: row;
+    }
+}
+
+.campos__text:focus {
+    box-shadow: 0px 0px 21px 12px rgb(122, 250, 244);
+}
+
+ .campos__botones {
+    width: 15rem;
+    font-size: 2rem;
+    font-family: var(--fuentePrincipal);
+    background-color: var(--amarillo);
+    padding: 0.5rem 0;
+    margin: 2rem 0;
+    border-radius: 2rem;
+    border: none;
+    cursor: pointer;
+}
+
+.cuenta {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        margin-top: 0;
+    }
+}

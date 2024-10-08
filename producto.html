@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Amaazona </title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/producto.css">
+</head>
+<body>
+    <header class="header">
+        <img class="logo" src="img/amaazona.png" alt="Logotipo" width="100" height="35">
+        <nav class="navegacion">
+            <a href="" class="navegacion__enlace">Compras</a>
+            <a href="" class="navegacion__enlace"><img src="img/carrito.png" alt="carrito" width="35" height="30"></a>
+            <a href="index.html" class="navegacion__enlace"> <img src="img/salir.png" alt="salir" width="25" height="30"></a>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <h1>Drupal</h1>
+        <div class="camisa">
+            <img class="camisa__imagen" src="img/productos/3.jpg" alt="Camisa">
+            <div class="camisa__contenido">
+                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32
+                    and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form.</p>
+                <form class="formulario">
+                    <select class="formulario__campo">
+                        <option disabled selected>--Seleccionar Talla--</option>
+                        <option>Chica</option>
+                        <option>Mediana</option>
+                        <option>Grande</option>
+                    </select>
+                    <input class="formulario__campo" type="number" placeholder="Cantidad" min="0">
+                    <button class="formulario__boton"> Agregar al carrito </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__text">© Amaazona. Todos los derechos reservados 2023.</p>
+    </footer>
+</body>
+</html>

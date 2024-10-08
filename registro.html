@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Amaazona </title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/inicio.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navegacion">
+            <a href="index.html" class="navegacion__enlace"><img src="img/home.png" alt="Home" width="30" height="30"></a>
+        </nav>
+    </header>
+    
+    <main class="registro">
+        <form class="campos__datos" method="POST" action="">
+            <img class="logo" src="img/logo.png" alt="Logotipo" width="150" height="150">
+            <h1 class="text-sesion">Registrar cuenta</h1>
+            <div class="campos">
+                <input class="campos__text" type="text" name="nombre" placeholder="Nombre">
+                <input class="campos__text" type="text" name="apellido" placeholder="Apellido">
+            </div>
+            <div class="campos">
+                <input class="campos__text" type="email" name="email" placeholder="Email">
+                <input class="campos__text" type="tel" name="telefono" placeholder="Telefono">
+            </div>
+            <div class="campos">
+                <input class="campos__text" type="text" name="usuario" placeholder="Usuario">
+                <input class="campos__text" type="password" name="password" placeholder="Contraseña">
+            </div>
+            <div class="campos">
+                <input class="campos__botones" type="submit" value="Crear cuenta" name="ingresar">
+            </div>
+        </form>
+    </main>
+    <footer class="footer">
+        <p class="footer__text"> © Amaazona. Todos los derechos reservados 2024.</p>
+    </footer>
+</body>
+</html>

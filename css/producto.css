@@ -1,0 +1,120 @@
+:root {
+    /*custom propeties*/
+    --fondo: #243238;
+    --amarillo: #ffce00;
+    --amaOscuro: rgb(209, 167, 0);
+    --blanco: #ffffff;
+    --negro: #000000;
+    --fuentePrincipal: 'Staatliches', cursive;
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+.logo {
+    margin: 1rem 3rem;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.camisa {
+    padding: 0 4rem 2rem 4rem;
+}
+
+@media (min-width: 768px) {
+    .camisa {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+    }
+}
+
+.camisa__contenido {
+    align-content: center;
+}
+
+.formulario__campo,
+.formulario__boton,
+.camisa__imagen {
+    width: 100%
+}
+
+.formulario__campo {
+    border: 1rem solid;
+    border-color: var(--fondo);
+    background-color: var(--fondo);
+    color: var(--blanco);
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0.5rem 0
+}
+
+.formulario__boton {
+    background-color: var(--amarillo);
+    border: none;
+    font-size: 2rem;
+    font-family: var(--fuentePrincipal);
+    padding: 2rem;
+    margin-top: 2rem;
+    transition: all .3s ease;
+    grid-column: 1 / 3;
+    position: relative;
+}
+
+@media(min-width: 420px) {
+    .formulario {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    .formulario__boton {
+        margin-top: 0;
+    }
+}
+
+.formulario__boton:hover {
+    font-size: 2.6rem;
+    padding: 1.65rem;
+    cursor: pointer;
+    background-color: var(--amaOscuro);
+}
+
+.formulario__boton:before {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: -10px;
+    left: -10px;
+    border-top: 4px solid var(--fondo);
+    border-left: 4px solid var(--fondo);
+    transition: all 0.25s;
+}
+
+.formulario__boton:hover:before,
+.formulario__boton:hover:after {
+    height: 100%;
+    width: 100%;
+}
+
+.formulario__boton:after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    bottom: -10px;
+    right: -10px;
+    border-bottom: 4px solid var(--fondo);
+    border-right: 4px solid var(--fondo);
+    transition: all 0.25s;
+}
+
+.btn:hover:after {
+    width: 100%;
+    height: 100%;
+}
