@@ -1,9 +1,11 @@
 var swiper = new Swiper(".slide-container", {
     spaceBetween: 20,
+    slidesPerGroup: 1,
     loop: true,
     centerSlide: true,
+    speed: 1500, 
     autoplay: {
-        delay: 5000,
+        delay: 4000,
         disableOnInteraction: false,
     },
     pagination: {
@@ -19,19 +21,15 @@ var swiper = new Swiper(".slide-container", {
     breakpoints: {
         0: {
             slidesPerView: 1,
-            slidesPerGroup: 1,
         },
         520: {
             slidesPerView: 2,
-            slidesPerGroup: 2,
         },
         769: {
             slidesPerView: 3,
-            slidesPerGroup: 3,
         },
         1000: {
             slidesPerView: 4,
-            slidesPerGroup: 4,
         },
     }
 });
