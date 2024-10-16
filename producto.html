@@ -1,47 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Amaazona </title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/producto.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amaazona</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/producto.css" />
+    <!-- Bootstrap CSS to FOOTER -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+  </head>
+  <body>
     <header class="header">
-        <img class="logo" src="img/amaazona.png" alt="Logotipo" width="100" height="35">
-        <nav class="navegacion">
-            <a href="" class="navegacion__enlace">Compras</a>
-            <a href="" class="navegacion__enlace"><img src="img/carrito.png" alt="carrito" width="35" height="30"></a>
-            <a href="index.html" class="navegacion__enlace"> <img src="img/salir.png" alt="salir" width="25" height="30"></a>
-        </nav>
+      <img
+        class="logo"
+        src="img/amaazona.png"
+        alt="Logotipo"
+        width="100"
+        height="35"
+      />
+      <nav class="navegacion">
+        <a href="" class="navegacion__enlace">Compras</a>
+        <a href="" class="navegacion__enlace"
+          ><img src="img/carrito.png" alt="carrito" width="35" height="30"
+        /></a>
+        <a href="index.html" class="navegacion__enlace">
+          <img src="img/salir.png" alt="salir" width="25" height="30"
+        /></a>
+      </nav>
     </header>
 
     <main class="contenedor">
-        <h1>Drupal</h1>
-        <div class="camisa">
-            <img class="camisa__imagen" src="img/productos/3.jpg" alt="Camisa">
-            <div class="camisa__contenido">
-                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32
-                    and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form.</p>
-                <form class="formulario">
-                    <select class="formulario__campo">
-                        <option disabled selected>--Seleccionar Talla--</option>
-                        <option>Chica</option>
-                        <option>Mediana</option>
-                        <option>Grande</option>
-                    </select>
-                    <input class="formulario__campo" type="number" placeholder="Cantidad" min="0">
-                    <button class="formulario__boton"> Agregar al carrito </button>
-                </form>
-            </div>
+      <h1>Drupal</h1>
+      <div class="camisa">
+        <img class="camisa__imagen" src="img/productos/3.jpg" alt="Camisa" />
+        <div class="camisa__contenido">
+          <p>
+            The standard chunk of Lorem Ipsum used since the 1500s is reproduced
+            below for those interested. Sections 1.10.32 and 1.10.33 from "de
+            Finibus Bonorum et Malorum" by Cicero are also reproduced in their
+            exact original form.
+          </p>
+          <form class="formulario">
+            <select class="formulario__campo">
+              <option disabled selected>--Seleccionar Talla--</option>
+              <option>Chica</option>
+              <option>Mediana</option>
+              <option>Grande</option>
+            </select>
+            <input
+              class="formulario__campo"
+              type="number"
+              placeholder="Cantidad"
+              min="0"
+            />
+            <button class="formulario__boton">Agregar al carrito</button>
+          </form>
         </div>
+      </div>
     </main>
 
-    <footer class="footer">
-        <p class="footer__text">© Amaazona. Todos los derechos reservados 2023.</p>
+    <footer class="footer-16371">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-9 text-center">
+            <div class="footer-site-logo mb-4">
+              <a>Amaazona</a>
+            </div>
+            <ul class="list-unstyled nav-links mb-5">
+              <li><a href="#">About</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Legal</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+
+            <div class="social mb-4">
+              <h3>Contáctanos</h3>
+              <ul class="list-unstyled">
+                <li class="in">
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+                <li class="fb">
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li class="tw">
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li class="pin">
+                  <a href="#"><span class="icon-google"></span></a>
+                </li>
+                <li class="dr">
+                  <a href="#"><span class="icon-whatsapp"></span></a>
+                </li>
+              </ul>
+            </div>
+            <div class="copyright">
+              <p class="mb-0">
+                <small>&copy; Amaazona. All Rights Reserved.</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>

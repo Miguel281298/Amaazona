@@ -1,39 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Amaazona </title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/inicio.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amaazona</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/inicio.css" />
+    <!--CSS FOOTER-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+  </head>
+  <body>
     <header class="header">
-       <nav class="navegacion">
-            <a href="" class="navegacion__enlace"><img src="img/config.png" alt="Configuraciones" width="30" height="30"></a>
-       </nav>
+      <nav class="navegacion">
+        <a href="" class="navegacion__enlace"
+          ><img
+            src="img/config.png"
+            alt="Configuraciones"
+            width="30"
+            height="30"
+        /></a>
+      </nav>
     </header>
-    
+
     <main class="registro">
-        <form class="campos__datos" method="POST" action="">
-            <img class="logo" src="img/logo.png" alt="Logotipo" width="150" height="150">
-            <h1 class="text-sesion">Iniciar Sesión</h1>
-            <div class="campos">
-                <input class="campos__text" type="text" name="usuario" placeholder="Usuario">
-            </div>
-            <div class="campos">
-                <input class="campos__text" type="password" name="password" placeholder="Contraseña">
-            </div>
-            <div class="campos">
-                <input class="campos__botones" type="submit" value="Ingresar" name="ingresar">
-            </div>
-            <p class="cuenta"> No tienes cuenta? <a href="registro.html"> Crear cuenta </a></p>
-        </form>
+      <form class="campos__datos" method="POST" action="">
+        <img
+          class="logo"
+          src="img/logo.png"
+          alt="Logotipo"
+          width="150"
+          height="150"
+        />
+        <h1 class="text-sesion">Iniciar Sesión</h1>
+        <div class="campos">
+          <input
+            class="campos__text"
+            type="text"
+            name="usuario"
+            placeholder="Usuario"
+          />
+        </div>
+        <div class="campos">
+          <input
+            class="campos__text"
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+          />
+        </div>
+        <div class="campos">
+          <input
+            class="campos__botones"
+            type="submit"
+            value="Ingresar"
+            name="ingresar"
+          />
+        </div>
+        <p class="cuenta">
+          No tienes cuenta? <a href="registro.html"> Crear cuenta </a>
+        </p>
+      </form>
     </main>
-    <footer class="footer">
-        <p class="footer__text"> © Amaazona. Todos los derechos reservados 2024.</p>
+
+    <footer class="footer-16371">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-9 text-center">
+            <div class="footer-site-logo mb-4">
+              <a>Amaazona</a>
+            </div>
+            <ul class="list-unstyled nav-links mb-5">
+              <li><a href="#">About</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Legal</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+
+            <div class="social mb-4">
+              <h3>Contáctanos</h3>
+              <ul class="list-unstyled">
+                <li class="in">
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+                <li class="fb">
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li class="tw">
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li class="pin">
+                  <a href="#"><span class="icon-google"></span></a>
+                </li>
+                <li class="dr">
+                  <a href="#"><span class="icon-whatsapp"></span></a>
+                </li>
+              </ul>
+            </div>
+            <div class="copyright">
+              <p class="mb-0">
+                <small>&copy; Amaazona. All Rights Reserved.</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
