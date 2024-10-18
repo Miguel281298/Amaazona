@@ -1,96 +1,24 @@
-*, *::before, *::after {
-    box-sizing: inherit;
-}
-
 html {
-    box-sizing: border-box;
-    font-size: 62.5%;
+  height: 100%;
 }
 
-body {
-    font-size: 1.6rem;
-    line-height: 1.5;
-    display: flex;
-    flex-direction: column;
-    background: #e1dfdf;
-}
-
-html, body {
-    height: 100%;
-}
-
-p, label {
-    font-size: 1.8rem;
-    font-family: Arial, Helvetica, sans-serif;
+p,
+label {
+  font-size: 1.8rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-h1, h2, h3 {
-    text-align: center;
-    font-family: 'Staatliches', cursive;
-}
-
-h1 {
-    font-size: 4rem;
-}
-
-h2 {
-    font-size: 3.2rem;
-}
-
+h1,
+h2,
 h3 {
-    font-size: 2.4rem;
-}
-
-.header {
-    background-color: #243238;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  text-align: center;
+  font-family: "Staatliches", cursive;
 }
 
 main {
-    flex-grow: 1;
-}
-
-.contenedor {
-    max-width: 110rem;
-    margin: 0 auto;
-}
-
-.navegacion {
-    padding: 1rem 3rem 1rem 0;
-    display: flex;
-    justify-content: end;
-    gap: 2rem;
-}
-
-.navegacion__enlace {
-    color: white;
-    font-size: 2rem;
-    font-family: 'Staatliches', cursive;
-    display: flex;
-    align-items: center;
-}
-
-.footer {
-    background-color: black;
-    margin-top: 4rem;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-.footer__text {
-    color: white;
-    font-family: 'Staatliches', cursive;
-    text-align: center;
-    margin: 10px 0;
-}
-
-input {
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  flex-grow: 1;
 }
