@@ -27,9 +27,9 @@ a:hover {
 
 .footer-16371 {
   width: 100%;
-  margin: 5rem 0;
+  margin: 3rem 0;
   font-family: "Poppins", sans-serif;
-  padding-top: 3rem;
+  padding-top: 1rem;
   box-shadow: 0px -10px 27px 0px rgba(0, 0, 0, 0.16);
 }
 .footer-16371 .footer-site-logo {
@@ -58,11 +58,12 @@ a:hover {
 }
 .footer-16371 .social h3 {
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #000;
 }
 .footer-16371 .social ul li {
   display: inline-block;
+  font-size: 1rem;
 }
 .footer-16371 .social ul li a {
   display: inline-block;
@@ -71,23 +72,21 @@ a:hover {
 }
 .footer-16371 .social ul li.in a {
   color: #df588a;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 .footer-16371 .social ul li.tw a {
   color: #15b8ff;
-  font-size: 3rem;
+  font-size: 1.5rem;
 }
 .footer-16371 .social ul li.fb a {
   color: #3742d0;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 .footer-16371 .social ul li.dr a {
   color: #10c53a;
+  font-size: 1.5rem;
 }
 .footer-16371 .social ul li.pin a {
   color: #ffee00;
-  font-size: 1rem;
-}
-.footer-16371 .copyright {
-  color: #999999;
+  font-size: 1.5rem;
 }
