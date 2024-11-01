@@ -123,33 +123,34 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
     <!-- Productos aleatorios -->
     <div class="container">
         <main class="contenedor">
-            <div class="grid">
-                <?php
-                $sql = "SELECT * FROM productos ORDER BY RAND() LIMIT 12"; 
-                $result = $conn->query($sql);
+        <div class="grid">
+            <?php
+            $sql = "SELECT * FROM productos ORDER BY RAND() LIMIT 12"; 
+            $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo '<div class="producto">';
-                        echo '<a href="producto.php?id=' . $row['ID_producto'] . '" class="producto__link">';
-                        echo '<div class="producto__imagen">';
-                        echo '<img src="productos/' . $row['nombre_imagen'] . '" alt="' . $row['nombre'] . '">';
-                        echo '</div>';
-                        echo '<div class="producto__informacion">';
-                        echo '<p class="producto__nombre">' . $row['nombre'] . '</p>';
-                        echo '<p class="producto__precio">$' . $row['precio'] . '</p>';
-                        echo '<p class="producto__envio"><span class="icon-rayo">⚡</span> Envío rápido</p>';
-                        echo '</div>';
-                        echo '</a>';
-                        echo '</div>';
-                    }
-                } else {
-                    echo "No hay productos disponibles.";
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo '<div class="producto">';
+                    echo '<a href="producto.php?id=' . $row['ID_producto'] . '" class="producto__link">';
+                    echo '<div class="producto__imagen">';
+                    echo '<img src="productos/' . $row['nombre_imagen'] . '" alt="' . $row['nombre'] . '" style="width: 100%; height: auto;">'; // Asegúrate de que la imagen se ajuste al contenedor
+                    echo '</div>';
+                    echo '<div class="producto__informacion" style="text-align: center;">'; // Centra el texto
+                    echo '<p class="producto__nombre">' . $row['nombre'] . '</p>';
+                    echo '<p class="producto__precio">$' . $row['precio'] . '</p>';
+                    echo '<p class="producto__envio"><span class="icon-rayo"></span> Envío rápido</p>';
+                    echo '</div>';
+                    echo '</a>';
+                    echo '</div>';
                 }
+            } else {
+                echo "No hay productos disponibles.";
+            }
 
-                $conn->close(); // Cierra la conexión
-                ?>
-            </div>
+            $conn->close(); // Cierra la conexión
+            ?>
+        </div>
+
         </main>
     </div>
 
