@@ -1,8 +1,8 @@
 <?php
-$host = "localhost";
-$user = "root"; 
-$password = "";
-$dbname = "amazonas";
+$host = "bousqgpxzzqtmjnjwawg-mysql.services.clever-cloud.com";
+$user = "uawcytjipzqvk5hg"; 
+$password = "wCiF6juaxbeCzvn8RpyQ";
+$dbname = "bousqgpxzzqtmjnjwawg";
 
 $conn = new mysqli($host, $user, $password, $dbname);
 

@@ -13,7 +13,7 @@ body {
   grid-template-rows: 1fr;
   font-family: "Raleway", sans-serif;
   background-color: #eaeaea;
-  margin: 5rem auto 10rem auto;
+  margin: 0 auto 10rem auto;
 }
 
 h3 {

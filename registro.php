@@ -7,10 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $correo = $_POST['correo'];
-    $contrasenia = password_hash($_POST['contrasenia'], PASSWORD_BCRYPT); // Encriptar contraseña
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Encriptar contraseña
 
     // Consulta para insertar el nuevo usuario en la base de datos
-    $sql = "INSERT INTO usuarios (Nombre, Apellido, Correo, Contrasenia) VALUES ('$nombre', '$apellido', '$correo', '$contrasenia')";
+    $sql = "INSERT INTO usuarios (Nombre, Apellido, Correo, Password) VALUES ('$nombre', '$apellido', '$correo', '$password')";
 
     if ($conn->query($sql) === TRUE) {
         // Iniciar sesión automáticamente al registrar el usuario

@@ -131,16 +131,16 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo '<div class="producto">';
-                    echo '<a href="producto.php?id=' . $row['ID_producto'] . '" class="producto__link">';
-                    echo '<div class="producto__imagen">';
-                    echo '<img src="productos/' . $row['nombre_imagen'] . '" alt="' . $row['nombre'] . '" style="width: 100%; height: auto;">'; // Asegúrate de que la imagen se ajuste al contenedor
-                    echo '</div>';
-                    echo '<div class="producto__informacion" style="text-align: center;">'; // Centra el texto
-                    echo '<p class="producto__nombre">' . $row['nombre'] . '</p>';
-                    echo '<p class="producto__precio">$' . $row['precio'] . '</p>';
-                    echo '<p class="producto__envio"><span class="icon-rayo"></span> Envío rápido</p>';
-                    echo '</div>';
-                    echo '</a>';
+                        echo '<a href="producto.php?id=' . $row['ID_Producto'] . '" class="producto__link">';
+                            echo '<div class="producto__imagen">';
+                                echo '<img src="img/productos/' . $row['ID_Producto'] . ".jpg" . '" alt="' . $row['Nombre'] . '" style="width: 100%; height: auto;">'; // Asegúrate de que la imagen se ajuste al contenedor
+                            echo '</div>';
+                            echo '<div class="producto__informacion" style="text-align: center;">'; // Centra el texto
+                                echo '<p class="producto__nombre">' . $row['Nombre'] . '</p>';
+                                echo '<p class="producto__precio">$' . $row['Precio'] . '</p>';
+                                echo '<p class="producto__envio"><span class="icon-rayo"></span> Envío rápido</p>';
+                            echo '</div>';
+                        echo '</a>';
                     echo '</div>';
                 }
             } else {
