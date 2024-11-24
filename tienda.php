@@ -55,10 +55,11 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Tienda</a>
+                            <a class="nav-link active" aria-current="page" href="tienda.php">Tienda</a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
+                        <a href="carrito.php"><img src="img/cart.png" alt="Bootstrap" width="23" height="23" style="margin-top: 1vh; margin-right:2vh"></a>
                         <input class="form-control me-2" type="search" placeholder="Necesito..." aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
@@ -123,34 +124,43 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
     <!-- Productos aleatorios -->
     <div class="container">
         <main class="contenedor">
-        <div class="grid">
-            <?php
-            $sql = "SELECT * FROM productos ORDER BY RAND() LIMIT 12"; 
-            $result = $conn->query($sql);
+            <div class="grid">
+                <?php
+                $sql = "SELECT * FROM Productos ORDER BY RAND() LIMIT 12"; 
+                $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo '<div class="producto">';
-                        echo '<a href="producto.php?id=' . $row['ID_Producto'] . '" class="producto__link">';
-                            echo '<div class="producto__imagen">';
-                                echo '<img src="img/productos/' . $row['ID_Producto'] . ".jpg" . '" alt="' . $row['Nombre'] . '" style="width: 100%; height: auto;">'; // Asegúrate de que la imagen se ajuste al contenedor
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo '<div class="producto">';
+                            echo '<a href="producto.php?id=' . $row['ID_Producto'] . '" class="producto__link">';
+                                echo '<div class="producto__imagen">';
+                                    echo '<img src="img/productos/' . $row['ID_Producto'] . ".jpg" . '" alt="' . $row['Nombre'] . '" style="width: 100%; height: auto;">';
+                                echo '</div>';
+                                echo '<div class="producto__informacion" style="text-align: center;">';
+                                    echo '<p class="producto__nombre">' . $row['Nombre'] . '</p>';
+                                    echo '<p class="producto__precio">$' . $row['Precio'] . '</p>';
+                                    echo '<p class="producto__envio"><span class="icon-rayo">⚡</span> Envío rápido</p>';
+                                echo '</div>';
+                            echo '</a>';
+
+                            // Controles de cantidad y botón de añadir al carrito
+                            echo '<div class="producto__cantidad">';
+                            echo '<button class="btn btn-outline-secondary btn-sm decrease" onclick="adjustQuantity(this, -1)">-</button>';
+                            echo '<input type="number" class="cantidad-input" value="1" min="1" style="width: 50px; text-align: center;" readonly>';
+                            echo '<button class="btn btn-outline-secondary btn-sm increase" onclick="adjustQuantity(this, 1)">+</button>';
                             echo '</div>';
-                            echo '<div class="producto__informacion" style="text-align: center;">'; // Centra el texto
-                                echo '<p class="producto__nombre">' . $row['Nombre'] . '</p>';
-                                echo '<p class="producto__precio">$' . $row['Precio'] . '</p>';
-                                echo '<p class="producto__envio"><span class="icon-rayo"></span> Envío rápido</p>';
-                            echo '</div>';
-                        echo '</a>';
-                    echo '</div>';
+                            echo '<button class="btn btn-primary add-to-cart" onclick="addToCart(' . $row['ID_Producto'] . ', this)">Añadir al carrito</button>';
+                            echo '<div class="added-to-cart" style="display: none; color: green; margin-top: 5px;">✓ Añadido</div>';
+
+                        echo '</div>';
+                    }
+                } else {
+                    echo "No hay productos disponibles.";
                 }
-            } else {
-                echo "No hay productos disponibles.";
-            }
 
-            $conn->close(); // Cierra la conexión
-            ?>
-        </div>
-
+                $conn->close();
+                ?>
+            </div>
         </main>
     </div>
 
@@ -181,8 +191,37 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
             </div>
         </div>
     </footer>
+    
+    <script>
+        function addToCart(id_producto, button) {
+            // Obtener la cantidad seleccionada
+            var cantidad = button.closest('.producto').querySelector('.cantidad-input').value;
 
+            // Crear la solicitud AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "agregar_carrito.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // Enviar los datos a PHP
+            xhr.send("id_producto=" + id_producto + "&cantidad=" + cantidad);
+
+            // Manejar la respuesta
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    // Mostrar el mensaje de éxito
+                    var addedMessage = button.closest('.producto').querySelector('.added-to-cart');
+                    addedMessage.style.display = "block";
+                    setTimeout(function() {
+                        addedMessage.style.display = "none";
+                    }, 2000); // Ocultar el mensaje después de 2 segundos
+                } else {
+                    alert("Hubo un error al agregar el producto al carrito.");
+                }
+            };
+        }
+    </script>
     <script src="js/swiper.js"></script>
     <script src="js/script.js"></script>
+
 </body>
 </html>

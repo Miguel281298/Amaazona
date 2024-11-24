@@ -10,12 +10,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Encriptar contraseña
 
     // Consulta para insertar el nuevo usuario en la base de datos
-    $sql = "INSERT INTO usuarios (Nombre, Apellido, Correo, Password) VALUES ('$nombre', '$apellido', '$correo', '$password')";
+    $sql = "INSERT INTO Usuarios (Nombre, Apellido, Correo, Password) VALUES ('$nombre', '$apellido', '$correo', '$password')";
 
     if ($conn->query($sql) === TRUE) {
         // Iniciar sesión automáticamente al registrar el usuario
         $_SESSION['nombre'] = $nombre;
         $_SESSION['apellido'] = $apellido;
+        $_SESSION['ID_Usuario'] = $resultado['ID_Usuario'];
 
         // Redirigir a la tienda con un mensaje emergente
         echo '<script>

@@ -4,10 +4,10 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('conexion.php');
 
-    $correo = $_POST['correo'];
+    $usuario = $_POST['correo'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM admin WHERE Correo = '$correo'";
+    $sql = "SELECT * FROM Admin WHERE Usuario = '$usuario'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Contraseña incorrecta.";
         }
     } else {
-        $sql = "SELECT * FROM usuarios WHERE Correo = '$correo'";
+        $sql = "SELECT * FROM Usuarios WHERE Correo = '$usuario'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $row['Password'])) {
                 $_SESSION['nombre'] = $row['Nombre'];
                 $_SESSION['apellido'] = $row['Apellido'];
+                $_SESSION['ID_Usuario'] = $row['ID_Usuario'];
                 header("Location: tienda.php"); // Redirigir a la página principal
             } else {
                 echo "Contraseña incorrecta.";
