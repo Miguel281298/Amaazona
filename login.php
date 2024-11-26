@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verificar la contraseña
         if ($password == $row['Password']) {
             echo "Acceso De Administrador Correcto.";
-            // header("Location: admin.php"); // Redirigir a la página principal
+            header("Location: /admin/admin.php"); // Redirigir a la página principal
         } else {
             echo "Contraseña incorrecta.";
         }

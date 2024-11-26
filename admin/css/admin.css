@@ -1,0 +1,77 @@
+body {
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6f5f7;
+    font-family: "Montserrat", sans-serif;
+}
+
+header {
+    width: 100%;
+}
+
+h2 {
+    margin: 10px 0;
+}
+
+.container {
+    max-width: 900px;
+    background-color: white;
+    justify-content: center;
+    padding: 20px 40px;
+    margin: 40px 0 20px 0;
+    box-shadow: 0px 0px 27px 3px rgba(0,0,0,0.75);
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.section {
+    border: 1px solid #c2c2c2;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.categoria img, .producto img { 
+    width: 150px;
+    height: 100px;
+}
+
+.categoria, .producto {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin: 20px;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.editar {
+    background-color: rgb(223, 223, 13);
+    width: 86px;
+    color: black;
+}
+
+.eliminar {
+    background-color: rgb(224, 3, 3);
+    color: white;
+    /* width: 95px; */
+}
+
+.boton {
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #b2b1b2;;
+    padding: 2px 15px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.btn-añadir {
+    background-color: #21ac09;
+    color: white;
+    padding: 5px;
+}
+
+.contenedor {
+    margin: 30px;
+}

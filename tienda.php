@@ -14,6 +14,7 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,11 +27,12 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/swiper.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" style="padding-left: 20px">
+                <a href="tienda.php" class="navbar-brand" style="padding-left: 20px">
                     <img src="img/amaazona.png" alt="Bootstrap" width="100" height="30">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +52,9 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Mi perfil</a></li>
                                 <li><a class="dropdown-item" href="#">Mis compras</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>
                             </ul>
                         </li>
@@ -72,46 +76,23 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
     <div class="container">
         <div class="slide-container">
             <div class="card-wrapper swiper-wrapper">
-                <div class="card swiper-slide">
-                    <div class="image-box">
-                        <a href="">
-                            <img src="img/categorias/1.jpg" alt="">
-                        </a>
-                    </div>
-                    <h3 class="name-category">Ropa</h3>
-                </div>
-                <div class="card swiper-slide">
-                    <div class="image-box">
-                        <a href="">
-                            <img src="img/categorias/2.jpg" alt="">
-                        </a>
-                    </div>
-                    <h3 class="name-category">Artículos deportivos</h3>
-                </div>
-                <div class="card swiper-slide">
-                    <div class="image-box">
-                        <a href="">
-                            <img src="img/categorias/3.jpg" alt="">
-                        </a>
-                    </div>
-                    <h3 class="name-category">Hogar</h3>
-                </div>
-                <div class="card swiper-slide">
-                    <div class="image-box">
-                        <a href="">
-                            <img src="img/categorias/4.jpg" alt="">
-                        </a>
-                    </div>
-                    <h3 class="name-category">Electrónica</h3>
-                </div>
-                <div class="card swiper-slide">
-                    <div class="image-box">
-                        <a href="">
-                            <img src="img/categorias/5.jpg" alt="">
-                        </a>
-                    </div>
-                    <h3 class="name-category">Juguetes</h3>
-                </div>
+                <?php
+                $sql = "SELECT * FROM Categorias";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($categoria = $result->fetch_assoc()) {
+                        echo '<div class="card swiper-slide">';
+                        echo '<div class="image-box">';
+                        echo '<a href=""><img src="img/categorias/' . $categoria['ID_Categoria'] . '.jpg" alt=""></a>';
+                        echo '</div>';
+                        echo '<h3 class="name-category">' . $categoria['Nombre']. '</h3>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo "No hay categorias disponibles.";
+                }
+                ?>
             </div>
         </div>
         <div class="movimiento">
@@ -126,31 +107,31 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
         <main class="contenedor">
             <div class="grid">
                 <?php
-                $sql = "SELECT * FROM Productos ORDER BY RAND() LIMIT 12"; 
+                $sql = "SELECT * FROM Productos ORDER BY RAND() LIMIT 12";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
+                    while ($row = $result->fetch_assoc()) {
                         echo '<div class="producto">';
-                            echo '<a href="producto.php?id=' . $row['ID_Producto'] . '" class="producto__link">';
-                                echo '<div class="producto__imagen">';
-                                    echo '<img src="img/productos/' . $row['ID_Producto'] . ".jpg" . '" alt="' . $row['Nombre'] . '" style="width: 100%; height: auto;">';
-                                echo '</div>';
-                                echo '<div class="producto__informacion" style="text-align: center;">';
-                                    echo '<p class="producto__nombre">' . $row['Nombre'] . '</p>';
-                                    echo '<p class="producto__precio">$' . $row['Precio'] . '</p>';
-                                    echo '<p class="producto__envio"><span class="icon-rayo">⚡</span> Envío rápido</p>';
-                                echo '</div>';
-                            echo '</a>';
+                        echo '<a href="producto.php?id=' . $row['ID_Producto'] . '" class="producto__link">';
+                        echo '<div class="producto__imagen">';
+                        echo '<img src="img/productos/' . $row['ID_Producto'] . ".jpg" . '" alt="' . $row['Nombre'] . '" style="width: 100%; height: auto;">';
+                        echo '</div>';
+                        echo '<div class="producto__informacion" style="text-align: center;">';
+                        echo '<p class="producto__nombre">' . $row['Nombre'] . '</p>';
+                        echo '<p class="producto__precio">$' . $row['Precio'] . '</p>';
+                        echo '<p class="producto__envio"><span class="icon-rayo">⚡</span> Envío rápido</p>';
+                        echo '</div>';
+                        echo '</a>';
 
-                            // Controles de cantidad y botón de añadir al carrito
-                            echo '<div class="producto__cantidad">';
-                            echo '<button class="btn btn-outline-secondary btn-sm decrease" onclick="adjustQuantity(this, -1)">-</button>';
-                            echo '<input type="number" class="cantidad-input" value="1" min="1" style="width: 50px; text-align: center;" readonly>';
-                            echo '<button class="btn btn-outline-secondary btn-sm increase" onclick="adjustQuantity(this, 1)">+</button>';
-                            echo '</div>';
-                            echo '<button class="btn btn-primary add-to-cart" onclick="addToCart(' . $row['ID_Producto'] . ', this)">Añadir al carrito</button>';
-                            echo '<div class="added-to-cart" style="display: none; color: green; margin-top: 5px;">✓ Añadido</div>';
+                        // Controles de cantidad y botón de añadir al carrito
+                        echo '<div class="producto__cantidad">';
+                        echo '<button class="btn btn-outline-secondary btn-sm decrease" onclick="adjustQuantity(this, -1)">-</button>';
+                        echo '<input type="number" class="cantidad-input" value="1" min="1" style="width: 50px; text-align: center;" readonly>';
+                        echo '<button class="btn btn-outline-secondary btn-sm increase" onclick="adjustQuantity(this, 1)">+</button>';
+                        echo '</div>';
+                        echo '<button class="btn btn-primary add-to-cart" onclick="addToCart(' . $row['ID_Producto'] . ', this)">Añadir al carrito</button>';
+                        echo '<div class="added-to-cart" style="display: none; color: green; margin-top: 5px;">✓ Añadido</div>';
 
                         echo '</div>';
                     }
@@ -191,7 +172,7 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
             </div>
         </div>
     </footer>
-    
+
     <script>
         function addToCart(id_producto, button) {
             // Obtener la cantidad seleccionada

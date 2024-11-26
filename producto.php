@@ -27,7 +27,7 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
 	<header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" style="padding-left: 20px">
+                <a href="tienda.php" class="navbar-brand" style="padding-left: 20px">
                     <img src="img/amaazona.png" alt="Bootstrap" width="100" height="30">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
