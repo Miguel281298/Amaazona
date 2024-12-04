@@ -8,12 +8,11 @@ include '../conexion.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amaazona</title>
-    <link rel="stylesheet" href="css/admin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../fonts/icomoon/style.css">
     <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/admin.css?v=<?php echo time(); ?>">
 </head>
 <body>
 
@@ -38,23 +37,26 @@ include '../conexion.php';
                                 Administrador
                             </a>
                             <ul class="dropdown-menu">
-                                <!-- <li><a class="dropdown-item" href="#">Mi perfil</a></li> -->
                                 <li><a class="dropdown-item" href="#"> Compras</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>
+                                <li><a class="dropdown-item" href="./../logout.php">Cerrar sesión</a></li>
                             </ul>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="tienda.php">Tienda</a>
-                        </li> -->
                     </ul>
-                    <form class="d-flex" role="search">
-                        <!-- <a href="carrito.php"><img src="../img/cart.png" alt="Bootstrap" width="23" height="23" style="margin-top: 1vh; margin-right:2vh"></a> -->
+                    <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active rounded-5" id="productos-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Productos</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-5" id="proveedores-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Proveedores</button>
+                        </li>
+                    </ul>
+                    <!-- <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Necesito..." aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </nav>
@@ -89,7 +91,6 @@ include '../conexion.php';
                 <a href="categoria.php" class="boton btn-añadir">Añadir Categoria</a>
             </div>
         </div>
-
         <div class="section">
             <h2>
                 <center> Productos </center>
@@ -125,6 +126,40 @@ include '../conexion.php';
                 <a href="producto.php" class="boton btn-añadir">Añadir Producto</a>
             </div>
         </div>
+
+        <div id= "proveedores_container" class= "d-flex flex-column justify-content-center">
+            <h1 class= "fs-1 lh-lg">Administracion de Proveedores</h1>
+            <button class= "btn btn-outline-success mb-3 shadow" data-bs-toggle="collapse" href= "#dar-alta" role= "button" aria-expanded="false" aria-controls="dar-alta">Dar de Alta Proveedor</button>
+            <section id= "dar-alta" class="collapse">
+                <form class= "d-flex flex-column justify-content-center" method= "POST">
+                    <label class= "text-start fs-3 p-1">Ingrese los datos del proveedor</label>
+                    <input type="text" placeholder="Nombre" class="m-1">
+                    <input type="number" placeholder="Telefono" class="m-1">
+                    <input type="text" placeholder="Calle" class="m-1">
+                    <input type="number" placeholder="Num. Interior (opc)" class="m-1">
+                    <input type="number" placeholder="Num. Exterior" class="m-1">
+                    <input type="text" placeholder="Estado" class="m-1">
+                    <input type="text" placeholder="Municipio" class="m-1">
+                    <input type="number" placeholder="Codigo Postal" class="m-1">
+                    <button class= "btn btn-primary btn-lg m-2 w-25">Enviar</button>
+                </form>
+            </section>
+            <button class= "btn btn-outline-danger mb-3 shadow" data-bs-toggle="collapse" href= "#agregar-inventario" role= "button" aria-expanded="false" aria-controls="agregar-inventario">Agregar Inventario</button>
+            <section id= "agregar-inventario" class="collapse">
+                <form class= "d-flex flex-column justify-content-center" method= "POST">
+                    <label class= "text-start">Ingrese los datos del proveedor.</label>
+                    <input type="text" placeholder="Nombre" class="m-1">
+                    <input type="number" placeholder="Telefono" class="m-1">
+                    <input type="text" placeholder="Calle" class="m-1">
+                    <input type="number" placeholder="Num. Interior (opc)" class="m-1">
+                    <input type="number" placeholder="Num. Exterior" class="m-1">
+                    <input type="text" placeholder="Estado" class="m-1">
+                    <input type="text" placeholder="Municipio" class="m-1">
+                    <input type="number" placeholder="Codigo Postal" class="m-1">
+                    <button class= "btn btn-outline-primary m-2">Enviar</button>
+                </form>
+            </section>
+        </div>
     </main>
 
     <footer class="footer-16371">
@@ -154,6 +189,6 @@ include '../conexion.php';
             </div>
         </div>
     </footer>
-
+    <script src="./js/toggle.js"></script>
 </body>
 </html>

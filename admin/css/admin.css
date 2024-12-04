@@ -3,7 +3,7 @@ body {
     align-items: center;
     display: flex;
     flex-direction: column;
-    background-color: #f6f5f7;
+    /* background-color: #f6f5f7; */
     font-family: "Montserrat", sans-serif;
 }
 
@@ -30,6 +30,7 @@ h2 {
     border: 1px solid #c2c2c2;
     border-radius: 5px;
     margin: 20px;
+    display: "none";
 }
 
 .categoria img, .producto img { 
