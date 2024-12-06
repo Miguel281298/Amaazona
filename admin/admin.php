@@ -1,5 +1,10 @@
 <?php
 include '../conexion.php';
+
+header("Cache-Control: no-cache, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0
+header("Expires: 0"); // Proxies
+
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +135,6 @@ include '../conexion.php';
                     } else {
                         echo "No hay productos disponibles.";
                     }
-                    $conn->close();
                     ?>
                     <div class="contenedor">
                         <a href="producto.php" class="btn btn-success">Añadir Producto</a>
@@ -142,7 +146,7 @@ include '../conexion.php';
             <div id="proveedores_container" class="tab-pane fade" role="tabpanel" aria-labelledby="show-suppliers">
                 <div class="d-flex flex-column justify-content-center">
                     <h1 class="fs-1 lh-lg text-center">Administración de Proveedores</h1>
-                    <!-- Dat de Alta Proveedor Section -->
+                    <!-- Dar de Alta Proveedor Section -->
                     <button class= "btn btn-outline-success mb-3 shadow" data-bs-toggle="collapse" href= "#dar-alta" role= "button" aria-expanded="false" aria-controls="dar-alta">Dar de Alta Proveedor</button>
                     <section id= "dar-alta" class="collapse">
                         <form action= "alta_proveedor.php" method= "POST" class= "align-items-center">
@@ -179,6 +183,7 @@ include '../conexion.php';
                                 <span class="input-group-text">Codigo Postal</span>
                                 <input name= "proveedor_codigoPostal" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <label>Productos que provee</label>
                             <div class="text-center">
                                 <div id="container-container" class="row row-cols-3">
                                     <div id="select-product" class="col my-2">
@@ -200,19 +205,82 @@ include '../conexion.php';
                             <button class= "btn btn-primary btn-lg m-2 w-25">Enviar</button>
                         </form>
                     </section>
-                    <button class= "btn btn-outline-danger mb-3 shadow" data-bs-toggle="collapse" href= "#agregar-inventario" role= "button" aria-expanded="false" aria-controls="agregar-inventario">Agregar Inventario</button>
-                    <section id= "agregar-inventario" class="collapse">
-                        <form class= "d-flex flex-column justify-content-center" method= "POST">
-                            <label class= "text-start">Ingrese los datos del proveedor.</label>
-                            <input type="text" placeholder="Nombre" class="m-1">
-                            <input type="number" placeholder="Telefono" class="m-1">
-                            <input type="text" placeholder="Calle" class="m-1">
-                            <input type="number" placeholder="Num. Interior (opc)" class="m-1">
-                            <input type="number" placeholder="Num. Exterior" class="m-1">
-                            <input type="text" placeholder="Estado" class="m-1">
-                            <input type="text" placeholder="Municipio" class="m-1">
-                            <input type="number" placeholder="Codigo Postal" class="m-1">
-                            <button class= "btn btn-outline-primary m-2">Enviar</button>
+                    <!-- Editar datos de un proovedor -->
+                    <button class= "btn btn-outline-danger mb-3 shadow" data-bs-toggle="collapse" href= "#editar-proveedor" role= "button" aria-expanded="false" aria-controls="editar-proveedor">Editar Datos de Proveedor</button>
+                    <section id= "editar-proveedor" class="collapse">
+                        <label class= "text-start fs-3 p-1">Modifique los datos del Proveedor Seleccionado</label>
+                        <div class="text-center">
+                            <div class="col my-2">
+                                <select id= "select-proveedor-input" class="form-select" aria-label="Default select example">
+                                    <option selected>Proveedor...</option>
+                                    <?php 
+                                    /* Query para obtener el Id y el Nombre de los proveedores */
+                                    $query= "SELECT ID_Proveedor,Nombre FROM Proveedores;";
+                                    $result= $conn->query($query);
+                                    if ($result->num_rows > 0)
+                                    {
+                                        $proveedores= [];
+                                        while($proveedor= $result->fetch_assoc())
+                                        {
+                                            $proveedores[]= $proveedor; 
+                                        }
+                                    }
+                                    foreach($proveedores as $proveedor)
+                                    {
+                                        echo '<option value='.$proveedor["ID_Proveedor"].'>'.$proveedor["ID_Proveedor"].' - '.$proveedor["Nombre"].'</option>';
+                                    }
+                                    $conn->close();
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <form id= "proveedores-form" action= "" method= "POST" class= "invisible align-items-center">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Nombre</span>
+                                <input id="Nombre" name= "proveedor_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Telefono</span>
+                                <input id="Telefono" name= "proveedor_telefono" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Calle</span>
+                                <input id="Calle" name= "proveedor_calle" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Num. Interior (opc)</span>
+                                <input id="Numero_Interior" name= "proveedor_numInterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Num. Exterior</span>
+                                <input id="Numero_Exterior" name= "proveedor_numExterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Estado</span>
+                                <input id="Estado" name= "proveedor_estado" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Municipio</span>
+                                <input id= "Municipio" name= "proveedor_municipio" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Codigo Postal</span>
+                                <input id="Codigo_Postal" name= "proveedor_codigoPostal" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <label>Productos que provee</label>
+                            <div class="text-center">
+                                <div class="row row-cols-3">
+                                    <div class="col my-2">
+                                        <select name="id-products[]" class="form-select" aria-label="Default select example">
+                                            <option selected>Producto...</option>
+                                        </select>
+                                    </div>
+                                    <div class="col my-2">
+                                        <button type="button" class="btn btn-success">Añadir Producto</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class= "btn btn-primary btn-lg m-2 w-25">Modificar</button>
                         </form>
                     </section>
                 </div>
