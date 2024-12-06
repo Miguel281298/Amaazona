@@ -45,12 +45,15 @@ include '../conexion.php';
                             </ul>
                         </li>
                     </ul>
-                    <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+                    <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" 
+                        style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active rounded-5" id="productos-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Productos</button>
+                            <button id="show-products" class="nav-link active rounded-5" data-bs-toggle="tab" data-bs-target="#productos_container" 
+                                    type="button" role="tab" aria-selected="true">Productos</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link rounded-5" id="proveedores-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Proveedores</button>
+                            <button id="show-suppliers" class="nav-link rounded-5" data-bs-toggle="tab" data-bs-target="#proveedores_container" 
+                                    type="button" role="tab" aria-selected="false">Proveedores</button>
                         </li>
                     </ul>
                     <!-- <form class="d-flex" role="search">
@@ -62,106 +65,160 @@ include '../conexion.php';
         </nav>
     </header>
 
-    <main class="container">
-        <div class="section">
-            <h2><center> Categorias </center></h2>
+    <main class="container mt-3">
+        <div class="tab-content">
+            <!-- Productos Container -->
+            <div id="productos_container" class="tab-pane fade show active" role="tabpanel" aria-labelledby="show-products">
+                <div class="section">
+                    <h2 class="text-center">Categorías</h2>
+                    <!-- PHP: Categorias Content -->
+                    <?php
+                    $sql = "SELECT * FROM Categorias";
+                    $result = $conn->query($sql);
 
-            <?php
-            $sql = "SELECT * FROM Categorias";
-            $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        echo '<div class="categoria" style="margin-left: 70px; font-weight: bold;">';
+                        echo '<p>Imagen</p>';
+                        echo '<p>Nombre</p>';
+                        echo '</div>';
+                        while ($categoria = $result->fetch_assoc()) {
+                            echo '<div class="categoria">';
+                            echo '<img src="../img/categorias/' . $categoria['ID_Categoria'] . '.jpg" alt="">';
+                            echo '<p>' . $categoria['Nombre'] . '</p>';
+                            echo '<a class="btn btn-primary editar" href="categoria.php?ID=' . $categoria['ID_Categoria'] . '">Editar</a>';
+                            echo '<button class="btn btn-danger eliminar">Eliminar</button>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo "No hay categorías disponibles.";
+                    }
+                    ?>
+                    <div class="contenedor">
+                        <a href="categoria.php" class="btn btn-success">Añadir Categoría</a>
+                    </div>
+                </div>
+                <!-- Productos Section -->
+                <div class="section">
+                    <h2 class="text-center">Productos</h2>
+                    <?php
+                    $sql = "SELECT * FROM Productos";
+                    $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                echo '<div class="categoria" style="margin-left: 70px; font-weight: bold;">';
-                echo '<p>Imagen</p>';
-                echo '<p>Nombre</p>';
-                echo '</div>';
-                while ($categoria = $result->fetch_assoc()) {
-                    echo '<div class="categoria">';
-                    echo '<img src="../img/categorias/' . $categoria['ID_Categoria'] . '.jpg" alt="">';
-                    echo '<p>' . $categoria['Nombre'] . '</p>';
-                    echo '<a class="boton editar" href="categoria.php?ID=' . $categoria['ID_Categoria'] . '">Editar</a>';
-                    echo '<button class="boton eliminar">Eliminar</button>';
-                    echo '</div>';
-                }
-            } else {
-                echo "No hay categorias disponibles.";
-            }
-            ?>
-            <div class="contenedor">
-                <a href="categoria.php" class="boton btn-añadir">Añadir Categoria</a>
+                    $productos= [];
+                    while ($producto = $result->fetch_assoc())
+                    {
+                        $productos[]= $producto; 
+                    }
+
+                    if ($result->num_rows > 0) {
+                        echo '<div class="producto" style="margin-left: 70px; font-weight: bold;">';
+                        echo '<p>Imagen</p>';
+                        echo '<p>Nombre</p>';
+                        echo '<p>Precio</p>';
+                        echo '<p>Stock</p>';
+                        echo '</div>';
+                        foreach($productos as $producto) {
+                            echo '<div class="producto">';
+                            echo '<img src="../img/productos/' . $producto['ID_Producto'] . '.jpg" alt="">';
+                            echo '<p>' . $producto['Nombre'] . '</p>';
+                            echo '<p> $' . $producto['Precio'] . '</p>';
+                            echo '<p>' . $producto['Stock'] . ' Pzas </p>';
+                            echo '<a class="btn btn-primary editar" href="producto.php?ID=' . $producto['ID_Producto'] . '">Editar</a>';
+                            echo '<button class="btn btn-danger eliminar">Eliminar</button>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo "No hay productos disponibles.";
+                    }
+                    $conn->close();
+                    ?>
+                    <div class="contenedor">
+                        <a href="producto.php" class="btn btn-success">Añadir Producto</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="section">
-            <h2>
-                <center> Productos </center>
-            </h2>
 
-            <?php
-            $sql = "SELECT * FROM Productos";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                echo '<div class="producto" style="margin-left: 70px; font-weight: bold;">';
-                echo '<p>Imagen</p>';
-                echo '<p>Nombre</p>';
-                echo '<p>Precio</p>';
-                echo '<p>Stock</p>';
-                echo '</div>';
-                while ($producto = $result->fetch_assoc()) {
-                    echo '<div class="producto">';
-                    echo '<img src="../img/productos/' . $producto['ID_Producto'] . '.jpg" alt="">';
-                    echo '<p>' . $producto['Nombre'] . '</p>';
-                    echo '<p> $' . $producto['Precio'] . '</p>';
-                    echo '<p>' . $producto['Stock'] . ' Pzas </p>';
-                    echo '<a class="boton editar" href="producto.php?ID=' . $producto['ID_Producto'] . '">Editar</a>';
-                    echo '<button class="boton eliminar">Eliminar</button>';
-                    echo '</div>';
-                }
-            } else {
-                echo "No hay productos disponibles.";
-            }
-            $conn->close();
-            ?>
-            <div class="contenedor">
-                <a href="producto.php" class="boton btn-añadir">Añadir Producto</a>
+            <!-- Proveedores Container -->
+            <div id="proveedores_container" class="tab-pane fade" role="tabpanel" aria-labelledby="show-suppliers">
+                <div class="d-flex flex-column justify-content-center">
+                    <h1 class="fs-1 lh-lg text-center">Administración de Proveedores</h1>
+                    <!-- Dat de Alta Proveedor Section -->
+                    <button class= "btn btn-outline-success mb-3 shadow" data-bs-toggle="collapse" href= "#dar-alta" role= "button" aria-expanded="false" aria-controls="dar-alta">Dar de Alta Proveedor</button>
+                    <section id= "dar-alta" class="collapse">
+                        <form action= "alta_proveedor.php" method= "POST" class= "align-items-center">
+                            <label class= "text-start fs-3 p-1">Ingrese los datos del proveedor</label>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Nombre</span>
+                                <input name= "proveedor_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Telefono</span>
+                                <input name= "proveedor_telefono" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Calle</span>
+                                <input name= "proveedor_calle" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Num. Interior (opc)</span>
+                                <input name= "proveedor_numInterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Num. Exterior</span>
+                                <input name= "proveedor_numExterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Estado</span>
+                                <input name= "proveedor_estado" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Municipio</span>
+                                <input name= "proveedor_municipio" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Codigo Postal</span>
+                                <input name= "proveedor_codigoPostal" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="text-center">
+                                <div id="container-container" class="row row-cols-3">
+                                    <div id="select-product" class="col my-2">
+                                        <select name="id-products[]" class="form-select" aria-label="Default select example">
+                                            <option selected>Producto...</option>
+                                            <?php 
+                                                foreach($productos as $producto)
+                                                {
+                                                    echo '<option value="'.$producto["ID_Producto"].'">'.$producto["Nombre"].'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col my-2">
+                                        <button id="add-product-bttn" type="button" class="btn btn-success">Añadir Producto</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class= "btn btn-primary btn-lg m-2 w-25">Enviar</button>
+                        </form>
+                    </section>
+                    <button class= "btn btn-outline-danger mb-3 shadow" data-bs-toggle="collapse" href= "#agregar-inventario" role= "button" aria-expanded="false" aria-controls="agregar-inventario">Agregar Inventario</button>
+                    <section id= "agregar-inventario" class="collapse">
+                        <form class= "d-flex flex-column justify-content-center" method= "POST">
+                            <label class= "text-start">Ingrese los datos del proveedor.</label>
+                            <input type="text" placeholder="Nombre" class="m-1">
+                            <input type="number" placeholder="Telefono" class="m-1">
+                            <input type="text" placeholder="Calle" class="m-1">
+                            <input type="number" placeholder="Num. Interior (opc)" class="m-1">
+                            <input type="number" placeholder="Num. Exterior" class="m-1">
+                            <input type="text" placeholder="Estado" class="m-1">
+                            <input type="text" placeholder="Municipio" class="m-1">
+                            <input type="number" placeholder="Codigo Postal" class="m-1">
+                            <button class= "btn btn-outline-primary m-2">Enviar</button>
+                        </form>
+                    </section>
+                </div>
             </div>
-        </div>
-
-        <div id= "proveedores_container" class= "d-flex flex-column justify-content-center">
-            <h1 class= "fs-1 lh-lg">Administracion de Proveedores</h1>
-            <button class= "btn btn-outline-success mb-3 shadow" data-bs-toggle="collapse" href= "#dar-alta" role= "button" aria-expanded="false" aria-controls="dar-alta">Dar de Alta Proveedor</button>
-            <section id= "dar-alta" class="collapse">
-                <form class= "d-flex flex-column justify-content-center" method= "POST">
-                    <label class= "text-start fs-3 p-1">Ingrese los datos del proveedor</label>
-                    <input type="text" placeholder="Nombre" class="m-1">
-                    <input type="number" placeholder="Telefono" class="m-1">
-                    <input type="text" placeholder="Calle" class="m-1">
-                    <input type="number" placeholder="Num. Interior (opc)" class="m-1">
-                    <input type="number" placeholder="Num. Exterior" class="m-1">
-                    <input type="text" placeholder="Estado" class="m-1">
-                    <input type="text" placeholder="Municipio" class="m-1">
-                    <input type="number" placeholder="Codigo Postal" class="m-1">
-                    <button class= "btn btn-primary btn-lg m-2 w-25">Enviar</button>
-                </form>
-            </section>
-            <button class= "btn btn-outline-danger mb-3 shadow" data-bs-toggle="collapse" href= "#agregar-inventario" role= "button" aria-expanded="false" aria-controls="agregar-inventario">Agregar Inventario</button>
-            <section id= "agregar-inventario" class="collapse">
-                <form class= "d-flex flex-column justify-content-center" method= "POST">
-                    <label class= "text-start">Ingrese los datos del proveedor.</label>
-                    <input type="text" placeholder="Nombre" class="m-1">
-                    <input type="number" placeholder="Telefono" class="m-1">
-                    <input type="text" placeholder="Calle" class="m-1">
-                    <input type="number" placeholder="Num. Interior (opc)" class="m-1">
-                    <input type="number" placeholder="Num. Exterior" class="m-1">
-                    <input type="text" placeholder="Estado" class="m-1">
-                    <input type="text" placeholder="Municipio" class="m-1">
-                    <input type="number" placeholder="Codigo Postal" class="m-1">
-                    <button class= "btn btn-outline-primary m-2">Enviar</button>
-                </form>
-            </section>
         </div>
     </main>
-
     <footer class="footer-16371">
         <div class="row justify-content-center">
             <div class="col-md-9 text-center">
@@ -189,6 +246,6 @@ include '../conexion.php';
             </div>
         </div>
     </footer>
-    <script src="./js/toggle.js"></script>
+    <script src="js/admin.js"></script>
 </body>
 </html>
