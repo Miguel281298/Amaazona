@@ -11,11 +11,6 @@ $municipio= $_POST["proveedor_municipio"];
 $codigoPostal= $_POST["proveedor_codigoPostal"];
 $idProductos= $_POST["id-products"];
 
-foreach($idProductos as $idProducto)
-{
-        echo $idProducto. " "; 
-}
-
 // Alta Proveedor
 $query= "INSERT IGNORE INTO Proveedores (Nombre,Telefono,Calle,Numero_Interior,Numero_Exterior,Estado,Municipio,Codigo_Postal)".
         "VALUES ('".$nombre."',".$telefono.",'".$calle."',".$numInterior.",".$numExterior.",'".$estado."','".$municipio."',".$codigoPostal.");";

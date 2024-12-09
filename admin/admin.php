@@ -210,31 +210,33 @@ header("Expires: 0"); // Proxies
                     <section id= "editar-proveedor" class="collapse">
                         <label class= "text-start fs-3 p-1">Modifique los datos del Proveedor Seleccionado</label>
                         <div class="text-center">
-                            <div class="col my-2">
-                                <select id= "select-proveedor-input" class="form-select" aria-label="Default select example">
-                                    <option selected>Proveedor...</option>
-                                    <?php 
-                                    /* Query para obtener el Id y el Nombre de los proveedores */
-                                    $query= "SELECT ID_Proveedor,Nombre FROM Proveedores;";
-                                    $result= $conn->query($query);
-                                    if ($result->num_rows > 0)
-                                    {
-                                        $proveedores= [];
-                                        while($proveedor= $result->fetch_assoc())
-                                        {
-                                            $proveedores[]= $proveedor; 
-                                        }
-                                    }
-                                    foreach($proveedores as $proveedor)
-                                    {
-                                        echo '<option value='.$proveedor["ID_Proveedor"].'>'.$proveedor["ID_Proveedor"].' - '.$proveedor["Nombre"].'</option>';
-                                    }
-                                    $conn->close();
-                                    ?>
-                                </select>
-                            </div>
                         </div>
-                        <form id= "proveedores-form" action= "" method= "POST" class= "invisible align-items-center">
+                        <div class="col my-2">
+                            <select id= "select-proveedor-input" class="form-select" aria-label="Default select example">
+                                <option selected>Proveedor...</option>
+                                <?php 
+                                /* Query para obtener el Id y el Nombre de los proveedores */
+                                $query= "SELECT ID_Proveedor,Nombre FROM Proveedores;";
+                                $result= $conn->query($query);
+                                if ($result->num_rows > 0)
+                                {
+                                    $proveedores= [];
+                                    while($proveedor= $result->fetch_assoc())
+                                    {
+                                        $proveedores[]= $proveedor; 
+                                    }
+                                }
+                                foreach($proveedores as $proveedor)
+                                {
+                                    echo '<option value='.$proveedor["ID_Proveedor"].'>'.$proveedor["ID_Proveedor"].' - '.$proveedor["Nombre"].'</option>';
+                                }
+                                $conn->close();
+                                ?>
+                            </select>
+                        </div>    
+                        <form id= "proveedores-form" action= "editar_proveedor.php" method= "POST" class= "invisible align-items-center">
+                            <input id="hidden-proveedores-input" name= "user_id" type="hidden">
+                            <input name= "action" type="hidden" value="1">
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Nombre</span>
                                 <input id="Nombre" name= "proveedor_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
@@ -269,14 +271,13 @@ header("Expires: 0"); // Proxies
                             </div>
                             <label>Productos que provee</label>
                             <div class="text-center">
-                                <div class="row row-cols-3">
+                                <div id="container-container-2" class="row row-cols-3">
+
+                                    <!-- Productos que el Proveedor ofrece -->
+                                     <!-- name= id-products[] -->
+
                                     <div class="col my-2">
-                                        <select name="id-products[]" class="form-select" aria-label="Default select example">
-                                            <option selected>Producto...</option>
-                                        </select>
-                                    </div>
-                                    <div class="col my-2">
-                                        <button type="button" class="btn btn-success">Añadir Producto</button>
+                                        <button id="add-product-bttn-2"  type="button" class="btn btn-success">Añadir Producto</button>
                                     </div>
                                 </div>
                             </div>
