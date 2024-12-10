@@ -44,7 +44,7 @@ document.getElementById("select-proveedor-input").addEventListener("change", fun
     const userId = document.getElementById("select-proveedor-input").value;
     // Get the form inputs
     const form= document.getElementById("proveedores-form");
-    // Set the user id into the hidden input
+    // Change the user id in the hidden input
     document.getElementById("hidden-proveedores-input").value= userId;
 
     // If the user didn't select an option
@@ -109,3 +109,15 @@ document.getElementById("select-proveedor-input").addEventListener("change", fun
 });
 
 
+/*
+    Warning message to remove a proveedor from the DB
+*/
+document.getElementById("dar-baja-form").addEventListener("submit", (e)=>{
+    // Get the proveedor name
+    const name= document.getElementById("dar-baja-form").element.querySelector("select").value;
+    // Confirm the action
+    const userConfirmed = confirm(`¿Estás seguro de que deseas eliminar al proveedor ${name}?`);
+
+    if(!userConfirmed)
+        e.preventDefault();
+});

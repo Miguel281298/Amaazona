@@ -48,7 +48,7 @@ if (isset($_POST['user_id']) && isset($_POST['action'])) {
             echo "Error updating row: " . $stmt->error;
         }
 
-        /* Updating proveedor products */
+        /* Updating the proveedor products */
         // Get the products in the DB
         $query= "
                 SELECT ID_Producto FROM Proveedores_Productos WHERE ID_Proveedor=$idProveedor;
@@ -68,7 +68,7 @@ if (isset($_POST['user_id']) && isset($_POST['action'])) {
                 }
                 $inDB[]= $prod["ID_Producto"];
             }
-
+            print_r($inDB);
             // The products in $inDb are going to be removed
             if(!empty($inDB))
             {

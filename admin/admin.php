@@ -61,10 +61,6 @@ header("Expires: 0"); // Proxies
                                     type="button" role="tab" aria-selected="false">Proveedores</button>
                         </li>
                     </ul>
-                    <!-- <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Necesito..." aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form> -->
                 </div>
             </div>
         </nav>
@@ -206,11 +202,9 @@ header("Expires: 0"); // Proxies
                         </form>
                     </section>
                     <!-- Editar datos de un proovedor -->
-                    <button class= "btn btn-outline-danger mb-3 shadow" data-bs-toggle="collapse" href= "#editar-proveedor" role= "button" aria-expanded="false" aria-controls="editar-proveedor">Editar Datos de Proveedor</button>
+                    <button class= "btn btn-outline-warning mb-3 shadow" data-bs-toggle="collapse" href= "#editar-proveedor" role= "button" aria-expanded="false" aria-controls="editar-proveedor">Editar Datos de Proveedor</button>
                     <section id= "editar-proveedor" class="collapse">
                         <label class= "text-start fs-3 p-1">Modifique los datos del Proveedor Seleccionado</label>
-                        <div class="text-center">
-                        </div>
                         <div class="col my-2">
                             <select id= "select-proveedor-input" class="form-select" aria-label="Default select example">
                                 <option selected>Proveedor...</option>
@@ -230,7 +224,6 @@ header("Expires: 0"); // Proxies
                                 {
                                     echo '<option value='.$proveedor["ID_Proveedor"].'>'.$proveedor["ID_Proveedor"].' - '.$proveedor["Nombre"].'</option>';
                                 }
-                                $conn->close();
                                 ?>
                             </select>
                         </div>    
@@ -284,6 +277,36 @@ header("Expires: 0"); // Proxies
                             <button class= "btn btn-primary btn-lg m-2 w-25">Modificar</button>
                         </form>
                     </section>
+                    <!-- Dar de baja proveedor -->
+                    <button type="button" class="btn btn-outline-danger"  data-bs-toggle="collapse" href= "#dar-baja-proveedor" role= "button" aria-expanded="false" aria-controls="dar-baja-proveedor">Dar de Baja</button>
+                    <section id= "dar-baja-proveedor" class= "collapse">
+                        <label class= "text-start fs-3 p-1">Seleccion el Proveedor a Dar de Baja</label>
+                        <form id= "dar-baja-form" action= "dar_baja_proveedor.php" method= "POST" class= "align-items-center">
+                            <div class="col my-2">
+                                <select class="form-select" name= "user_id" aria-label="Default select example">
+                                    <option selected>Proveedor...</option>
+                                    <?php 
+                                    /* Query para obtener el Id y el Nombre de los proveedores */
+                                    $query= "SELECT ID_Proveedor,Nombre FROM Proveedores;";
+                                    $result= $conn->query($query);
+                                    if ($result->num_rows > 0)
+                                    {
+                                        $proveedores= [];
+                                        while($proveedor= $result->fetch_assoc())
+                                        {
+                                            $proveedores[]= $proveedor;
+                                        }
+                                    }
+                                    foreach($proveedores as $proveedor)
+                                    {
+                                        echo '<option value='.$proveedor["ID_Proveedor"].'>'.$proveedor["ID_Proveedor"].' - '.$proveedor["Nombre"].'</option>';
+                                    }
+                                    ?>
+                                </select>
+                                <button class= "btn btn-primary btn-lg m-2 w-25">Eliminar</button>
+                            </div> 
+                        </form>
+                    </section>
                 </div>
             </div>
         </div>
@@ -318,3 +341,9 @@ header("Expires: 0"); // Proxies
     <script src="js/admin.js"></script>
 </body>
 </html>
+
+<?php
+
+    // Close connection
+    $conn->close();
+?>
