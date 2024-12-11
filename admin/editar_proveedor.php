@@ -32,7 +32,6 @@ if (isset($_POST['user_id']) && isset($_POST['action'])) {
             $setIdProductos[$id]= true;
         }
 
-
         /* Updating proveedor info */
         $query= "
                 UPDATE Proveedores 
@@ -54,13 +53,13 @@ if (isset($_POST['user_id']) && isset($_POST['action'])) {
                 SELECT ID_Producto FROM Proveedores_Productos WHERE ID_Proveedor=$idProveedor;
         ";
         $result= $conn->query($query);
+        $inDB= [];
         if($result->num_rows > 0)
         {
             // Check if the products in the form are already in DB
-            $inDB= [];
+            
             while($prod= $result->fetch_assoc())
             {   
-                print_r($prod);
                 if (array_key_exists($prod["ID_Producto"], $setIdProductos))
                 {
                     unset($setIdProductos[$prod["ID_Producto"]]);
@@ -68,41 +67,39 @@ if (isset($_POST['user_id']) && isset($_POST['action'])) {
                 }
                 $inDB[]= $prod["ID_Producto"];
             }
-            print_r($inDB);
-            // The products in $inDb are going to be removed
-            if(!empty($inDB))
-            {
-                $query= "DELETE FROM Proveedores_Productos WHERE ID_Proveedor = $idProveedor AND (0";
-                foreach($inDB as $id)
-                {
-                    $query= $query." OR ID_Producto=".$id;
-                }
-                $query= $query.");";
-                echo $query;
-                $conn->query($query) or die("Error on first query ".mysqli_error($conn));
-            }
-            
-            // The products in $setIdProductos are going to be added
-            if(!empty($setIdProductos))
-            {
-                $query= "INSERT IGNORE INTO Proveedores_Productos (ID_Proveedor, ID_Producto) VALUES ";
-                foreach($setIdProductos as $key => $id)
-                {
-                    if (!is_int($key))
-                    {
-                        continue;
-                    }
-                    
-                    $query= $query."($idProveedor,$key),";
-                }
-                $query= substr($query,0,-1);
-                $query= $query.";";
-                $conn->query($query) or die("Error on second Query. ".mysqli_error($conn));
-            }
-            
-            // Roll back to admin screen
-            header("Location: admin.php");
         }
+        // The products in $inDb are going to be removed
+        if(!empty($inDB))
+        {
+            $query= "DELETE FROM Proveedores_Productos WHERE ID_Proveedor = $idProveedor AND (0";
+            foreach($inDB as $id)
+            {
+                $query= $query." OR ID_Producto=".$id;
+            }
+            $query= $query.");";
+            $conn->query($query) or die("Error on first query ".mysqli_error($conn));
+        }
+        
+        // The products in $setIdProductos are going to be added
+        if(!empty($setIdProductos))
+        {
+            $query= "INSERT IGNORE INTO Proveedores_Productos (ID_Proveedor, ID_Producto) VALUES ";
+            foreach($setIdProductos as $key => $id)
+            {
+                if (!is_int($key))
+                {
+                    continue;
+                }
+                
+                $query= $query."($idProveedor,$key),";
+            }
+            $query= substr($query,0,-1);
+            $query= $query.";";
+            $conn->query($query) or die("Error on second Query. ".mysqli_error($conn));
+        }
+        
+        // Roll back to admin screen
+        header("Location: admin.php");
     }
     else
     {
