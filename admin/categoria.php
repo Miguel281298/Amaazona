@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errores)) {
         $query = isset($categoria) ?
-            "UPDATE Categorias SET Nombre = '" . $_POST['nombre'] . "' WHERE ID_Categoria = " . $_POST['id'] . "" :
+            "UPDATE Categorias SET Nombre = '" . $_POST['nombre'] . "' WHERE ID_Categoria = " . $_POST['id'] . ";" :
             "INSERT INTO Categorias (Nombre) VALUES ('" . $_POST['nombre'] . "');";
         $conn->query($query);
 
