@@ -11,10 +11,10 @@ body {
   margin-bottom: 5vh;
 }
 .card {
-  margin: auto;
+  margin: 30px auto;
   max-width: 950px;
   width: 90%;
-  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0px 0px 26px 4px rgba(0,0,0,0.75);
   border-radius: 1rem;
   border: transparent;
 }
@@ -28,6 +28,7 @@ body {
   padding: 4vh 5vh;
   border-bottom-left-radius: 1rem;
   border-top-left-radius: 1rem;
+  padding: 40px 40px;
 }
 @media (max-width: 767px) {
   .cart {
@@ -42,6 +43,7 @@ body {
   border-bottom-right-radius: 1rem;
   padding: 4vh;
   color: rgb(65, 65, 65);
+  font-weight: bolder;
 }
 @media (max-width: 767px) {
   .summary {
@@ -117,7 +119,6 @@ input:focus::-webkit-input-placeholder {
   color: white;
   width: 100%;
   font-size: 0.7rem;
-  margin-top: 4vh;
   padding: 1vh;
   border-radius: 0;
 }
@@ -150,4 +151,40 @@ a:hover {
   background-repeat: no-repeat;
   background-position-x: 95%;
   background-position-y: center;
+}
+
+.espacio {
+  display: flex;
+  justify-content: space-evenly;
+  column-gap: 10px;
+}
+
+.cantidad {
+  margin: 5px 0;
+  font-weight: 900;
+  font-size: 20px;
+  padding: 2px 10px;
+  width: 50%;
+}
+
+.cantidad-input {
+  text-align: center;
+}
+
+.row form select {
+  margin-bottom: 40px;
+}
+
+
+.boton {
+  width: 100%;
+  padding: 5px;
+  background-color: #0d6efd;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.boton:hover {
+  background-color: #0954c5;
 }

@@ -69,13 +69,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amaazona</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/admin.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="css/formularios.css">
 </head>
 
 <body>
 
     <main class="container">
-        <h2><center> <?= isset($categoria) ? 'Editar Categoria' : 'Añadir Categoria'; ?> </center></h2>
+        <h2>
+            <center> <?= isset($categoria) ? 'Editar Categoria' : 'Añadir Categoria'; ?> </center>
+        </h2>
         <a href="admin.php" class="boton">Volver</a>
 
         <?php foreach ($errores as $error): ?>
@@ -85,19 +90,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endforeach; ?>
 
         <form class="formulario" method="POST" enctype="multipart/form-data">
-            <fieldset>
-                <legend>Información Categoria</legend>
-                <div class="info">
-                    <label for="nombre">Nombre: </label>
-                    <input type="text" value="<?= isset($categoria) ? $categoria['Nombre'] : ''; ?>" id="nombre" name="nombre" placeholder="Nombre del Producto">
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Nombre:</span>
+                <input type="text" value="<?= isset($producto) ? $producto['Nombre'] : ''; ?>" id="nombre" name="nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Nombre del Producto">
+            </div>
 
-                    <label for="imagen">Imagen:</label>
-                    <input type="file" id="imagen" name="imagen" accept="image/jpeg">
-                </div>
-            </fieldset>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Imagen:</span>
+                <input style="width: 89%" type="file" id="imagen" name="imagen" accept="image/jpg">
+            </div>
 
+            <legend>Productos que pertenecen</legend>
             <fieldset>
-                <legend>Productos que pertenecen</legend>
                 <div class="opciones">
                     <?php
                     $sql = "SELECT * FROM Productos";
@@ -105,9 +109,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     if ($result->num_rows > 0) {
                         while ($producto = $result->fetch_assoc()) {
-                            echo '<div class="producto">';
+                            echo '<div class="producto" style="margin: 5px 0;">';
                             echo '<input type="checkbox" name="productos[]" id="producto' . $producto['ID_Producto'] . '" value="' . $producto['ID_Producto'] . '"' . (in_array($producto['ID_Producto'], $productos) ? ' checked' : '') .  '>';
-                            echo '<label for="producto' . $producto['ID_Producto'] . '">' . $producto['Nombre'] . '</label>';
+                            echo '<label style="margin-left: 10px;" for="producto' . $producto['ID_Producto'] . '">' . $producto['Nombre'] . '</label>';
                             echo '</div>';
                         }
                     } else {

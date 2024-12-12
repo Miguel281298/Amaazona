@@ -75,68 +75,77 @@ header("Expires: 0"); // Proxies
             <div id="productos_container" class="tab-pane fade show active" role="tabpanel" aria-labelledby="show-products">
                 <div class="section">
                     <h2 class="text-center">Categorías</h2>
-                    <!-- PHP: Categorias Content -->
-                    <?php
-                    $sql = "SELECT * FROM Categorias WHERE ID_Categoria > 0";
-                    $result = $conn->query($sql);
 
-                    if ($result->num_rows > 0) {
-                        echo '<div class="categoria" style="margin-left: 70px; font-weight: bold;">';
-                        echo '<p>Imagen</p>';
-                        echo '<p>Nombre</p>';
-                        echo '</div>';
-                        while ($categoria = $result->fetch_assoc()) {
-                            echo '<div class="categoria">';
-                            echo '<img src="../img/categorias/' . $categoria['ID_Categoria'] . '.jpg" alt="">';
-                            echo '<p>' . $categoria['Nombre'] . '</p>';
-                            echo '<a class="boton btn-primary editar" href="categoria.php?ID=' . $categoria['ID_Categoria'] . '">Editar</a>';
-                            echo '<button class="boton btn-danger eliminar">Eliminar</button>';
+                        <!-- PHP: Categorias Content -->
+                        <?php
+                        $sql = "SELECT * FROM Categorias WHERE ID_Categoria > 0";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            echo '<div class="categoria" style="margin-left: 70px; font-weight: bold;">';
+                            echo '<p>Imagen</p>';
+                            echo '<p>Nombre</p>';
                             echo '</div>';
+                            while ($categoria = $result->fetch_assoc()) {
+                                echo '<form action="dar_baja.php?tipo=1" method="POST">';
+                                echo '<div class="categoria">';
+                                echo '<input type="hidden" name="id" value="'. $categoria['ID_Categoria'] .'">';
+                                echo '<img src="../img/categorias/' . $categoria['ID_Categoria'] . '.jpg" alt="">';
+                                echo '<p>' . $categoria['Nombre'] . '</p>';
+                                echo '<a class="boton btn-primary editar" href="categoria.php?ID=' . $categoria['ID_Categoria'] . '">Editar</a>';
+                                echo '<input type="submit" class="boton btn-danger eliminar" value="Eliminar">';
+                                echo '</div>';
+                                echo '</form>';
+                            }
+                        } else {
+                            echo "No hay categorías disponibles.";
                         }
-                    } else {
-                        echo "No hay categorías disponibles.";
-                    }
-                    ?>
-                    <div class="contenedor">
-                        <a href="categoria.php" class="btn btn-success">Añadir Categoría</a>
-                    </div>
+                        ?>
+                        <div class="contenedor">
+                            <a href="categoria.php" class="btn btn-success">Añadir Categoría</a>
+                        </div>
+                    
                 </div>
                 <!-- Productos Section -->
                 <div class="section">
                     <h2 class="text-center">Productos</h2>
-                    <?php
-                    $sql = "SELECT * FROM Productos";
-                    $result = $conn->query($sql);
+                        <?php
+                        $sql = "SELECT * FROM Productos";
+                        $result = $conn->query($sql);
 
-                    $productos = [];
-                    while ($producto = $result->fetch_assoc()) {
-                        $productos[] = $producto;
-                    }
-
-                    if ($result->num_rows > 0) {
-                        echo '<div class="producto" style="margin-left: 70px; font-weight: bold;">';
-                        echo '<p>Imagen</p>';
-                        echo '<p>Nombre</p>';
-                        echo '<p>Precio</p>';
-                        echo '<p>Stock</p>';
-                        echo '</div>';
-                        foreach ($productos as $producto) {
-                            echo '<div class="producto">';
-                            echo '<img src="../img/productos/' . $producto['ID_Producto'] . '.png" alt="">';
-                            echo '<p>' . $producto['Nombre'] . '</p>';
-                            echo '<p> $' . $producto['Precio'] . '</p>';
-                            echo '<p>' . $producto['Stock'] . ' Pzas </p>';
-                            echo '<a class="boton btn-primary editar" href="producto.php?ID=' . $producto['ID_Producto'] . '">Editar</a>';
-                            echo '<button class="boton btn-danger eliminar">Eliminar</button>';
-                            echo '</div>';
+                        $productos = [];
+                        while ($producto = $result->fetch_assoc()) {
+                            $productos[] = $producto;
                         }
-                    } else {
-                        echo "No hay productos disponibles.";
-                    }
-                    ?>
-                    <div class="contenedor">
-                        <a href="producto.php" class="btn btn-success">Añadir Producto</a>
-                    </div>
+
+                        if ($result->num_rows > 0) {
+                            echo '<div class="producto" style="margin-left: 70px; font-weight: bold;">';
+                            echo '<p>Imagen</p>';
+                            echo '<p>Nombre</p>';
+                            echo '<p>Precio</p>';
+                            echo '<p>Stock</p>';
+                            echo '</div>';
+                            foreach ($productos as $producto) {
+                                echo '<form action="dar_baja.php?tipo=2" method="POST">';
+                                echo '<div class="producto">';
+                                echo '<input type="hidden" name="id" value="' . $producto['ID_Producto'] . '">';
+                                echo '<img src="../img/productos/' . $producto['ID_Producto'] . '.png" alt="">';
+                                echo '<p>' . $producto['Nombre'] . '</p>';
+                                echo '<p> $' . $producto['Precio'] . '</p>';
+                                echo '<p>' . $producto['Stock'] . ' Pzas </p>';
+                                echo '<a class="boton btn-primary editar" href="producto.php?ID=' . $producto['ID_Producto'] . '">Editar</a>';
+                                echo '<input type="submit" class="boton btn-danger eliminar" value="Eliminar">';
+                                echo '</div>';
+                                echo '</form>';
+                            }
+                        } else {
+                            echo "No hay productos disponibles.";
+                        }
+                        ?>
+                        <div class="contenedor">
+                            <a href="producto.php" class="btn btn-success">Añadir Producto</a>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -285,7 +294,7 @@ header("Expires: 0"); // Proxies
                                     <option selected>Proveedor...</option>
                                     <?php
                                     /* Query para obtener el Id y el Nombre de los proveedores */
-                                    $query = "SELECT ID_Proveedor,Nombre FROM Proveedores;";
+                                    $query = "SELECT ID_Proveedor, Nombre FROM Proveedores;";
                                     $result = $conn->query($query);
                                     if ($result->num_rows > 0) {
                                         $proveedores = [];
