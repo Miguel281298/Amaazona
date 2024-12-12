@@ -278,7 +278,7 @@ header("Expires: 0"); // Proxies
                         </form>
                     </section>
                     <!-- Dar de baja proveedor -->
-                    <button type="button" class="btn btn-outline-danger"  data-bs-toggle="collapse" href= "#dar-baja-proveedor" role= "button" aria-expanded="false" aria-controls="dar-baja-proveedor">Dar de Baja</button>
+                    <button type="button" class="btn btn-outline-danger mb-3 shadow"  data-bs-toggle="collapse" href= "#dar-baja-proveedor" role= "button" aria-expanded="false" aria-controls="dar-baja-proveedor">Dar de Baja</button>
                     <section id= "dar-baja-proveedor" class= "collapse">
                         <label class= "text-start fs-3 p-1">Seleccion el Proveedor a Dar de Baja</label>
                         <form id= "dar-baja-form" action= "dar_baja_proveedor.php" method= "POST" class= "align-items-center">
@@ -305,6 +305,56 @@ header("Expires: 0"); // Proxies
                                 </select>
                                 <button class= "btn btn-primary btn-lg m-2 w-25">Eliminar</button>
                             </div> 
+                        </form>
+                    </section>
+                    <!-- Comprar Inventario -->
+                    <button type="button" class="btn btn-outline-info mb-3 shadow"  data-bs-toggle="collapse" href= "#comprar-inventario" role= "button" aria-expanded="false" aria-controls="comprar-inventario">Comprar Inventario</button>
+                    <section id= "comprar-inventario" class= "collapse fade">
+                        <label class= "text-start fs-3 p-1">Seleccione el proveedor, Inventario y Cantidad a Comprar</label>
+                        <form id= "comprar-inventario" action= "comprar_inventario.php" method= "POST">
+                            <input id="comprar-user-id" name= "user_id" type="hidden">
+                            <input name= "action" type="hidden" value="1">
+                            <div id="container-container-3" class="text-center">
+                                <div class="row row-cols-3">
+                                    <div class="col my-2">
+                                        <select id="select-proveedor-comprar" name="" class="form-select" aria-label="Default select example">
+                                            <option selected>Producto...</option>
+                                            <?php 
+                                                foreach($proveedores as $proveedor)
+                                                {
+                                                    echo '<option value="'.$proveedor["ID_Proveedor"].'">'.$proveedor["ID_Proveedor"].' - '.$proveedor["Nombre"].'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col my-2">
+                                        <label>Cantidad</label>
+                                    </div>
+                                    <div class="col my-2">
+                                        <label>Precio Unitario</label>
+                                    </div>
+                                </div>
+                                <div id="comprar-select-section" class="row row-cols-3 invisible">
+                                    <div class="col my-2">
+                                        <select name="id-producto[]" class="form-select" aria-label="Default select example">
+                                            <option selected>Producto...</option>
+                                            <!-- Insert the options -->
+                                        </select>
+                                    </div>
+                                    <div class="col my-2">
+                                        <input name= "cantidad-producto[]" type="number" min= "0" max= "9999" oninput="validateInput(this)">
+                                    </div>
+                                    <div class="col my-2">
+                                        <input name= "precio-producto[]" type="number" min= "0" max= "99999" oninput="validateInput2(this)">
+                                    </div>
+                                </div>
+                                <div id="comprar-button-section" class="row row-cols-3 invisible">
+                                    <div class="col my-2">
+                                        <button id="comprar-add-product-bttn" type="button" class="btn btn-success">Añadir Producto</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class= "btn btn-primary btn-lg m-2 w-25">Comprar</button>
                         </form>
                     </section>
                 </div>
