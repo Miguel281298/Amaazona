@@ -9,6 +9,12 @@ if (!isset($_SESSION['nombre'])) {
 
 $nombre_usuario = $_SESSION['nombre'] . " " . $_SESSION['apellido'];
 
+if (isset($_GET['categoria'])) {
+    $id_categoria = $_GET['categoria'];
+    $id_categoria = filter_var($id_categoria, FILTER_VALIDATE_INT); // Sanitizar los datos
+}
+
+
 include 'conexion.php'; // Incluye tu conexión a la base de datos
 ?>
 
@@ -19,11 +25,11 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amaazona</title>
-    <link rel="stylesheet" href="css/tienda.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="css/tienda.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/swiper.css">
 </head>
@@ -84,9 +90,9 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
                     while ($categoria = $result->fetch_assoc()) {
                         echo '<div class="card swiper-slide">';
                         echo '<div class="image-box">';
-                        echo '<a href=""><img src="img/categorias/' . $categoria['ID_Categoria'] . '.jpg" alt=""></a>';
+                        echo '<a href="tienda.php?categoria=' . $categoria['ID_Categoria'] . '"><img src="img/categorias/' . $categoria['ID_Categoria'] . '.jpg" alt=""></a>';
                         echo '</div>';
-                        echo '<h3 class="name-category">' . $categoria['Nombre']. '</h3>';
+                        echo '<h3 class="name-category">' . $categoria['Nombre'] . '</h3>';
                         echo '</div>';
                     }
                 } else {
@@ -107,7 +113,13 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
         <main class="contenedor">
             <div class="grid">
                 <?php
-                $sql = "SELECT * FROM Productos ORDER BY RAND() LIMIT 12";
+
+                if (isset($id_categoria) and $id_categoria > 0) {
+                    $sql = "SELECT * FROM Productos JOIN Categorias_Productos ON Productos.ID_Producto = Categorias_Productos.ID_Producto
+                    WHERE Categorias_Productos.ID_Categoria = $id_categoria";
+                } else {
+                    $sql = "SELECT * FROM Productos ORDER BY RAND()";
+                }
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -115,7 +127,7 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
                         echo '<div class="producto">';
                         echo '<a href="producto.php?id=' . $row['ID_Producto'] . '" class="producto__link">';
                         echo '<div class="producto__imagen">';
-                        echo '<img src="img/productos/' . $row['ID_Producto'] . ".jpg" . '" alt="' . $row['Nombre'] . '" style="width: 100%; height: auto;">';
+                        echo '<img src="img/productos/' . $row['ID_Producto'] . ".png" . '" alt="' . $row['Nombre'] . '" style="width: 100%; height: auto;">';
                         echo '</div>';
                         echo '<div class="producto__informacion" style="text-align: center;">';
                         echo '<p class="producto__nombre">' . $row['Nombre'] . '</p>';
@@ -126,13 +138,12 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
 
                         // Controles de cantidad y botón de añadir al carrito
                         echo '<div class="producto__cantidad">';
-                        echo '<button class="btn btn-outline-secondary btn-sm decrease" onclick="adjustQuantity(this, -1)">-</button>';
-                        echo '<input type="number" class="cantidad-input" value="1" min="1" style="width: 50px; text-align: center;" readonly>';
-                        echo '<button class="btn btn-outline-secondary btn-sm increase" onclick="adjustQuantity(this, 1)">+</button>';
+                        echo '<button class="btn btn-outline-secondary btn-sm decrease" onclick="adjustQuantity(this, -1, ' . $row['ID_Producto'] . ',' . $row['Stock'] . ')">-</button>';
+                        echo '<input type="number" class="cantidad-input" value="1" min="1" style="width: 75px; text-align: center; margin: auto 5px" readonly>';
+                        echo '<button class="btn btn-outline-secondary btn-sm increase" onclick="adjustQuantity(this, 1, ' . $row['ID_Producto'] . ', ' . $row['Stock'] . ')">+</button>';
                         echo '</div>';
                         echo '<button class="btn btn-primary add-to-cart" onclick="addToCart(' . $row['ID_Producto'] . ', this)">Añadir al carrito</button>';
                         echo '<div class="added-to-cart" style="display: none; color: green; margin-top: 5px;">✓ Añadido</div>';
-
                         echo '</div>';
                     }
                 } else {
@@ -188,21 +199,26 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
 
             // Manejar la respuesta
             xhr.onload = function() {
-                if (xhr.status == 200) {
-                    // Mostrar el mensaje de éxito
-                    var addedMessage = button.closest('.producto').querySelector('.added-to-cart');
-                    addedMessage.style.display = "block";
-                    setTimeout(function() {
-                        addedMessage.style.display = "none";
-                    }, 2000); // Ocultar el mensaje después de 2 segundos
+                if (xhr.status == 200 || xhr.status == 500) {
+                    // Mostrar el mensaje de éxito como un alert
+                    alert(xhr.responseText); // Mostrar el mensaje de éxito que se envía desde PHP
                 } else {
+                    console.log(xhr.status);
                     alert("Hubo un error al agregar el producto al carrito.");
                 }
             };
+        }
+
+        function adjustQuantity(button, amount, productId, stock) {
+            let quantityInput = button.parentElement.querySelector('.cantidad-input');
+            let quantity = parseInt(quantityInput.value) + amount;
+            quantity = Math.min(Math.max(1, quantity), stock); // Limita entre 1 y stock
+            quantityInput.value = quantity;
         }
     </script>
     <script src="js/swiper.js"></script>
     <script src="js/script.js"></script>
 
 </body>
+
 </html>

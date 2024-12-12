@@ -2,7 +2,7 @@ body {
   background: #ddd;
   min-height: 100vh;
   vertical-align: middle;
-  display: flex;
+  /* display: flex; */
   font-family: sans-serif;
   font-size: 0.8rem;
   font-weight: bold;
@@ -77,7 +77,7 @@ a {
   margin-left: auto;
   font-size: 0.7rem;
 }
-img {
+img .img-fluid {
   width: 3.5rem;
 }
 .back-to-shop {

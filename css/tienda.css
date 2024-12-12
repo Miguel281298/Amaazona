@@ -93,6 +93,13 @@
   margin-top: 0.5rem; /* Espaciado superior */
 }
 
+.producto__cantidad {
+  align-items: center;
+  display: flex;
+  margin-bottom: 5px;
+  justify-content: center;
+}
+
 /* Media queries para tamaños de pantalla más pequeños */
 @media (max-width: 900px) {
   .producto__nombre {
@@ -221,4 +228,8 @@ h3 {
 
 main {
   flex-grow: 1;
+}
+
+.btn-sm {
+  color: #000000;
 }

@@ -18,6 +18,7 @@ $sql = "
         p.Descripcion,
         p.Precio,
         c.Cantidad,
+        p.Stock,
         (p.Precio * c.Cantidad) AS Subtotal
     FROM Carrito_Compra c
     JOIN Productos p ON c.ID_Producto = p.ID_Producto
@@ -35,6 +36,7 @@ $articulos = 0;
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,17 +47,20 @@ $articulos = 0;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/carrito.css">
 </head>
-<body>
-<header>
 
-</header>
+<body>
+    <header>
+
+    </header>
 
     <div class="card">
         <div class="row">
             <div class="col-md-8 cart">
                 <div class="title">
                     <div class="row">
-                        <div class="col"><h4><b>Mi Carrito</b></h4></div>
+                        <div class="col">
+                            <h4><b>Mi Carrito</b></h4>
+                        </div>
                     </div>
                 </div>
 
@@ -63,15 +68,15 @@ $articulos = 0;
                     <div class="row border-top border-bottom">
                         <div class="row main align-items-center">
                             <div class="col-2">
-                                <img class="img-fluid" src="<?= 'img/productos/' . $row['ID_Producto'] . '.jpg' ?>" alt="<?= $row['Nombre'] ?>">
+                                <img class="img-fluid" src="<?= 'img/productos/' . $row['ID_Producto'] . '.png' ?>" alt="<?= $row['Nombre'] ?>">
                             </div>
                             <div class="col">
                                 <div class="row text-muted"><?= $row['Nombre'] ?></div>
                             </div>
                             <div class="col">
                                 <input type="text" class="cantidad-input border" value="<?= $row['Cantidad'] ?>" readonly>
-                                <button onclick="adjustQuantity(this, -1, <?= $row['ID_Producto'] ?>)">-</button>
-                                <button onclick="adjustQuantity(this, 1, <?= $row['ID_Producto'] ?>)">+</button>
+                                <button onclick="adjustQuantity(this, -1, <?= $row['ID_Producto'] ?>, <?= $row['Stock'] ?>)">-</button>
+                                <button onclick="adjustQuantity(this, 1, <?= $row['ID_Producto'] ?>, <?= $row['Stock'] ?>)">+</button>
                             </div>
                             <div class="col">
                                 <span><?= number_format($row['Precio'], 2) ?> MXN</span>
@@ -86,11 +91,13 @@ $articulos = 0;
                 <?php endwhile; ?>
             </div>
             <div class="col-md-4 summary">
-                <div><h5><b>TOTAL DE LA COMPRA</b></h5></div>
+                <div>
+                    <h5><b>TOTAL DE LA COMPRA</b></h5>
+                </div>
                 <hr>
                 <div class="row">
                     <div class="col" style="padding-left:0;">ARTÍCULOS: <span class="articulos"><?= $articulos ?></span></div>
-                    
+
                 </div>
                 <form>
                     <p>ENVÍO</p>
@@ -116,17 +123,17 @@ $articulos = 0;
     <footer></footer>
 
     <script>
-        function adjustQuantity(button, amount, productId) {
+        function adjustQuantity(button, amount, productId, stock) {
             let quantityInput = button.parentElement.querySelector('.cantidad-input');
             let quantity = parseInt(quantityInput.value) + amount;
-            quantity = Math.max(1, quantity); // Asegura que la cantidad sea al menos 1
+            quantity = Math.min(Math.max(1, quantity), stock); // Limita entre 1 y stock
             quantityInput.value = quantity;
 
             // Enviar la actualización al servidor
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'update_cart.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onload = function () {
+            xhr.onload = function() {
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
                     if (response.success) {
@@ -146,10 +153,10 @@ $articulos = 0;
             let articulos = 0;
 
             // Suma todos los subtotales
-            document.querySelectorAll('.cantidad-input').forEach(function (input) {
+            document.querySelectorAll('.cantidad-input').forEach(function(input) {
                 articulos += parseInt(input.value);
             });
-            document.querySelectorAll('.subtotal').forEach(function (subtotalElement) {
+            document.querySelectorAll('.subtotal').forEach(function(subtotalElement) {
                 let subtotal = parseFloat(subtotalElement.innerText.replace(/[^\d.-]/g, '').trim());
 
                 total += subtotal;
@@ -167,6 +174,7 @@ $articulos = 0;
         }
     </script>
 </body>
+
 </html>
 
 <?php

@@ -1,6 +1,8 @@
 <?php
 include '../conexion.php';
 
+$productos = [];
+
 if (isset($_GET['ID'])) {
     $id_categoria = $_GET['ID'];
     $id_categoria = filter_var($id_categoria, FILTER_VALIDATE_INT); // Sanitizar los datos
@@ -8,6 +10,13 @@ if (isset($_GET['ID'])) {
     $sql = "SELECT * FROM Categorias WHERE ID_Categoria = $id_categoria";
     $result = $conn->query($sql);
     $categoria = $result->fetch_assoc();
+
+    $sql = "SELECT ID_Producto FROM Categorias_Productos WHERE ID_Categoria = $id_categoria";
+    $result = $conn->query($sql);
+    $temp = $result->fetch_all();
+    foreach ($temp as $producto) {
+        $productos[] = $producto[0];
+    }
 }
 
 $errores = [];
@@ -25,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errores)) {
-        $query = $categoria ?
-            "UPDATE Categorias SET Nombre = '" . $_POST['nombre'] . "' WHERE ID_Categoria = " . $_POST['id'] . ";" :
+        $query = isset($categoria) ?
+            "UPDATE Categorias SET Nombre = '" . $_POST['nombre'] . "' WHERE ID_Categoria = " . $_POST['id'] . "" :
             "INSERT INTO Categorias (Nombre) VALUES ('" . $_POST['nombre'] . "');";
         $conn->query($query);
 
@@ -37,6 +46,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_categoria = $row['ultimo_id'];
         }
         move_uploaded_file($imagen['tmp_name'], '../img/categorias/' . $id_categoria . '.jpg');
+
+        if (isset($categoria)) {
+            $sql = "DELETE FROM Categorias_Productos WHERE ID_Categoria = $id_categoria";
+            $conn->query($sql);
+        }
+        $sql = "";
+        foreach ($_POST['productos'] as $producto) {
+            $sql .= "INSERT INTO Categorias_Productos (ID_Categoria, ID_Producto) VALUES ($id_categoria, $producto);";
+        }
+        $conn->multi_query($sql);
 
         echo '<script> alert("Se han guardado los cambios"); window.location.href = "admin.php"; </script>';
     }
@@ -70,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <legend>Información Categoria</legend>
                 <div class="info">
                     <label for="nombre">Nombre: </label>
-                    <input type="text" value="<?php echo $categoria['Nombre']; ?>" id="nombre" name="nombre" placeholder="Nombre del Producto">
+                    <input type="text" value="<?= isset($categoria) ? $categoria['Nombre'] : ''; ?>" id="nombre" name="nombre" placeholder="Nombre del Producto">
 
                     <label for="imagen">Imagen:</label>
                     <input type="file" id="imagen" name="imagen" accept="image/jpeg">
@@ -87,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($result->num_rows > 0) {
                         while ($producto = $result->fetch_assoc()) {
                             echo '<div class="producto">';
-                            echo '<input type="checkbox" name="producto' . $producto['ID_Producto'] . '" id="producto' . $producto['ID_Producto'] . '">';
+                            echo '<input type="checkbox" name="productos[]" id="producto' . $producto['ID_Producto'] . '" value="' . $producto['ID_Producto'] . '"' . (in_array($producto['ID_Producto'], $productos) ? ' checked' : '') .  '>';
                             echo '<label for="producto' . $producto['ID_Producto'] . '">' . $producto['Nombre'] . '</label>';
                             echo '</div>';
                         }
