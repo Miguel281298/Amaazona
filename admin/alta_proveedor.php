@@ -32,11 +32,11 @@ if ($result->num_rows > 0)
 
         foreach($idProductos as $idProducto)
         {
-                if (!is_int($idProducto))
-                {
+                if (!is_numeric($idProducto))
+                {       
                         continue;
                 }
-
+                
                 // Execute query
                 $id_proveedor = intval($id_proveedor); 
                 $idProducto0 = intval($idProducto[0]);
@@ -44,11 +44,15 @@ if ($result->num_rows > 0)
                 $query = "INSERT IGNORE INTO Proveedores_Productos (ID_Proveedor, ID_Producto) VALUES (?, ?)";
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("ii", $id_proveedor, $idProducto0);
-                $stmt->execute();
+                if($stmt->execute())
+                {
+                        echo "Rows added";
+                }
+                else
+                {
+                        echo mysqli_error($conn);
+                }
                 $stmt->close();
-                
-                // In case something went wrong, display the error.
-                echo mysqli_error($conn);
         }
 }       
 else

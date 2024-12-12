@@ -121,3 +121,91 @@ document.getElementById("dar-baja-form").addEventListener("submit", (e)=>{
     if(!userConfirmed)
         e.preventDefault();
 });
+
+
+/*
+    Validate input (amount) type number
+*/
+function validateInput(input) {
+    if (input.value < 0) input.value = 0;
+    if (input.value > 9999) input.value = 9999;
+}
+/*
+    Validate input (unit price) type number
+*/
+function validateInput2(input) {
+    if (input.value < 0) input.value = 0;
+    if (input.value > 99999) input.value = 99999;
+}
+
+
+/*
+    Query to consult the products based on the selected proveedor (Comprar Inventario)
+*/
+document.getElementById("select-proveedor-comprar").addEventListener("change", (e)=>{
+    // Get the selected user ID
+    const userId = document.getElementById("select-proveedor-comprar").value;
+    // Change the user id in the hidden input
+    document.getElementById("comprar-user-id").value= userId;
+    // Set visible the following elements
+    document.getElementById("comprar-select-section").classList.remove("invisible");
+    document.getElementById("comprar-button-section").classList.remove("invisible");
+
+    // Consult Proveedor Information with a AJAX request
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "comprar_inventario.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const userInfo = JSON.parse(xhr.responseText);
+
+            const originalSelectInput= document.getElementById("select-product").querySelector("select");
+            const clonedSelectInput= document.getElementById("comprar-select-section").querySelector("select");
+            // Clean all options in the cloned select input
+            while (clonedSelectInput.options.length > 0) {
+                clonedSelectInput.remove(0); // Remove all options
+            }
+
+            // Add the 'Producto...' option
+            const newOption = document.createElement("option");
+            // Set the text content and attributes
+            newOption.textContent = "Producto...";
+            newOption.selected = true;
+            // Add the new option to the select element
+            clonedSelectInput.appendChild(newOption);
+
+            // Add the products that the proveedor supply
+            const userInfoIDs = userInfo.map(product => product.ID_Producto); // Extract ID_Producto values
+            Array.from(originalSelectInput.options).forEach(option => {
+                if (userInfoIDs.includes(option.value)) {
+                    // Add matching option to cloned select input
+                    const clonedOption = document.createElement("option");
+                    clonedOption.value = option.value;
+                    clonedOption.textContent = option.textContent;
+                    clonedSelectInput.appendChild(clonedOption);
+                }
+            });
+        }
+    };
+    xhr.send("user_id=" + userId + "&action=0"); // Send variables to the server
+});
+
+// Add product (comprar section)
+document.getElementById("comprar-add-product-bttn").addEventListener("click", function() {
+    const originalSelectContainer = document.getElementById("comprar-select-section");
+
+    // Clone the select container (but not the whole row)
+    const clonedSelectContainer = originalSelectContainer.cloneNode(true);
+
+    // Clear the ID to avoid duplication
+    clonedSelectContainer.id = '';
+
+    // Get the parent container
+    const containerContainer = document.getElementById('container-container-3');
+
+    // Get the button section to insert the new element before
+    const addButtonSection = document.getElementById('comprar-button-section');
+
+    // Insert the cloned select container before the button section
+    containerContainer.insertBefore(clonedSelectContainer, addButtonSection);
+});
