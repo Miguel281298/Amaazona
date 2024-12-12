@@ -22,7 +22,6 @@ header("Expires: 0"); // Proxies
 </head>
 
 <body>
-
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -53,15 +52,15 @@ header("Expires: 0"); // Proxies
                             </ul>
                         </li>
                     </ul>
-                    <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist"
+                    <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" 
                         style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
                         <li class="nav-item" role="presentation">
-                            <button id="show-products" class="nav-link active rounded-5" data-bs-toggle="tab" data-bs-target="#productos_container"
-                                type="button" role="tab" aria-selected="true">Productos</button>
+                            <button id="show-products" class="nav-link active rounded-5" data-bs-toggle="tab" data-bs-target="#productos_container" 
+                                    type="button" role="tab" aria-selected="true">Productos</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button id="show-suppliers" class="nav-link rounded-5" data-bs-toggle="tab" data-bs-target="#proveedores_container"
-                                type="button" role="tab" aria-selected="false">Proveedores</button>
+                            <button id="show-suppliers" class="nav-link rounded-5" data-bs-toggle="tab" data-bs-target="#proveedores_container" 
+                                    type="button" role="tab" aria-selected="false">Proveedores</button>
                         </li>
                     </ul>
                 </div>
@@ -154,41 +153,41 @@ header("Expires: 0"); // Proxies
                 <div class="d-flex flex-column justify-content-center">
                     <h1 class="fs-1 lh-lg text-center">Administración de Proveedores</h1>
                     <!-- Dar de Alta Proveedor Section -->
-                    <button class="btn btn-outline-success mb-3 shadow" data-bs-toggle="collapse" href="#dar-alta" role="button" aria-expanded="false" aria-controls="dar-alta">Dar de Alta Proveedor</button>
-                    <section id="dar-alta" class="collapse">
-                        <form action="alta_proveedor.php" method="POST" class="align-items-center">
-                            <label class="text-start fs-3 p-1">Ingrese los datos del proveedor</label>
+                    <button class= "btn btn-outline-success mb-3 shadow" data-bs-toggle="collapse" href= "#dar-alta" role= "button" aria-expanded="false" aria-controls="dar-alta">Dar de Alta Proveedor</button>
+                    <section id= "dar-alta" class="collapse">
+                        <form action= "alta_proveedor.php" method= "POST" class= "align-items-center">
+                            <label class= "text-start fs-3 p-1">Ingrese los datos del proveedor</label>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Nombre</span>
-                                <input name="proveedor_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input name= "proveedor_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Telefono</span>
-                                <input name="proveedor_telefono" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input name= "proveedor_telefono" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Calle</span>
-                                <input name="proveedor_calle" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input name= "proveedor_calle" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Num. Interior (opc)</span>
-                                <input name="proveedor_numInterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input name= "proveedor_numInterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Num. Exterior</span>
-                                <input name="proveedor_numExterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input name= "proveedor_numExterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Estado</span>
-                                <input name="proveedor_estado" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input name= "proveedor_estado" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Municipio</span>
-                                <input name="proveedor_municipio" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input name= "proveedor_municipio" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Codigo Postal</span>
-                                <input name="proveedor_codigoPostal" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input name= "proveedor_codigoPostal" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <label>Productos que provee</label>
                             <div class="text-center">
@@ -196,10 +195,11 @@ header("Expires: 0"); // Proxies
                                     <div id="select-product" class="col my-2">
                                         <select name="id-products[]" class="form-select" aria-label="Default select example">
                                             <option selected>Producto...</option>
-                                            <?php
-                                            foreach ($productos as $producto) {
-                                                echo '<option value="' . $producto["ID_Producto"] . '">' . $producto["Nombre"] . '</option>';
-                                            }
+                                            <?php 
+                                                foreach($productos as $producto)
+                                                {
+                                                    echo '<option value="'.$producto["ID_Producto"].'">'.$producto["Nombre"].'</option>';
+                                                }
                                             ?>
                                         </select>
                                     </div>
@@ -208,91 +208,94 @@ header("Expires: 0"); // Proxies
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-lg m-2 w-25">Enviar</button>
+                            <button class= "btn btn-primary btn-lg m-2 w-25">Enviar</button>
                         </form>
                     </section>
                     <!-- Editar datos de un proovedor -->
-                    <button class="btn btn-outline-warning mb-3 shadow" data-bs-toggle="collapse" href="#editar-proveedor" role="button" aria-expanded="false" aria-controls="editar-proveedor">Editar Datos de Proveedor</button>
-                    <section id="editar-proveedor" class="collapse">
-                        <label class="text-start fs-3 p-1">Modifique los datos del Proveedor Seleccionado</label>
+                    <button class= "btn btn-outline-warning mb-3 shadow" data-bs-toggle="collapse" href= "#editar-proveedor" role= "button" aria-expanded="false" aria-controls="editar-proveedor">Editar Datos de Proveedor</button>
+                    <section id= "editar-proveedor" class="collapse">
+                        <label class= "text-start fs-3 p-1">Modifique los datos del Proveedor Seleccionado</label>
                         <div class="col my-2">
-                            <select id="select-proveedor-input" class="form-select" aria-label="Default select example">
+                            <select id= "select-proveedor-input" class="form-select" aria-label="Default select example">
                                 <option selected>Proveedor...</option>
-                                <?php
+                                <?php 
                                 /* Query para obtener el Id y el Nombre de los proveedores */
-                                $query = "SELECT ID_Proveedor,Nombre FROM Proveedores;";
-                                $result = $conn->query($query);
-                                if ($result->num_rows > 0) {
-                                    $proveedores = [];
-                                    while ($proveedor = $result->fetch_assoc()) {
-                                        $proveedores[] = $proveedor;
+                                $query= "SELECT ID_Proveedor,Nombre FROM Proveedores;";
+                                $result= $conn->query($query);
+                                if ($result->num_rows > 0)
+                                {
+                                    $proveedores= [];
+                                    while($proveedor= $result->fetch_assoc())
+                                    {
+                                        $proveedores[]= $proveedor; 
                                     }
                                 }
-                                foreach ($proveedores as $proveedor) {
-                                    echo '<option value=' . $proveedor["ID_Proveedor"] . '>' . $proveedor["ID_Proveedor"] . ' - ' . $proveedor["Nombre"] . '</option>';
+                                foreach($proveedores as $proveedor)
+                                {
+                                    echo '<option value='.$proveedor["ID_Proveedor"].'>'.$proveedor["ID_Proveedor"].' - '.$proveedor["Nombre"].'</option>';
                                 }
                                 ?>
                             </select>
-                        </div>
-                        <form id="proveedores-form" action="editar_proveedor.php" method="POST" class="invisible align-items-center">
-                            <input id="hidden-proveedores-input" name="user_id" type="hidden">
-                            <input name="action" type="hidden" value="1">
+                        </div>    
+                        <form id= "proveedores-form" action= "editar_proveedor.php" method= "POST" class= "invisible align-items-center">
+                            <input id="hidden-proveedores-input" name= "user_id" type="hidden">
+                            <input name= "action" type="hidden" value="1">
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Nombre</span>
-                                <input id="Nombre" name="proveedor_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input id="Nombre" name= "proveedor_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Telefono</span>
-                                <input id="Telefono" name="proveedor_telefono" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input id="Telefono" name= "proveedor_telefono" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Calle</span>
-                                <input id="Calle" name="proveedor_calle" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input id="Calle" name= "proveedor_calle" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Num. Interior (opc)</span>
-                                <input id="Numero_Interior" name="proveedor_numInterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input id="Numero_Interior" name= "proveedor_numInterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Num. Exterior</span>
-                                <input id="Numero_Exterior" name="proveedor_numExterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input id="Numero_Exterior" name= "proveedor_numExterior" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Estado</span>
-                                <input id="Estado" name="proveedor_estado" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input id="Estado" name= "proveedor_estado" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Municipio</span>
-                                <input id="Municipio" name="proveedor_municipio" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input id= "Municipio" name= "proveedor_municipio" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text">Codigo Postal</span>
-                                <input id="Codigo_Postal" name="proveedor_codigoPostal" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input id="Codigo_Postal" name= "proveedor_codigoPostal" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <label>Productos que provee</label>
                             <div class="text-center">
                                 <div id="container-container-2" class="row row-cols-3">
 
                                     <!-- Productos que el Proveedor ofrece -->
-                                    <!-- name= id-products[] -->
+                                     <!-- name= id-products[] -->
 
                                     <div class="col my-2">
-                                        <button id="add-product-bttn-2" type="button" class="btn btn-success">Añadir Producto</button>
+                                        <button id="add-product-bttn-2"  type="button" class="btn btn-success">Añadir Producto</button>
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-lg m-2 w-25">Modificar</button>
+                            <button class= "btn btn-primary btn-lg m-2 w-25">Modificar</button>
                         </form>
                     </section>
                     <!-- Dar de baja proveedor -->
-                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="collapse" href="#dar-baja-proveedor" role="button" aria-expanded="false" aria-controls="dar-baja-proveedor">Dar de Baja</button>
-                    <section id="dar-baja-proveedor" class="collapse">
-                        <label class="text-start fs-3 p-1">Seleccion el Proveedor a Dar de Baja</label>
-                        <form id="dar-baja-form" action="dar_baja_proveedor.php" method="POST" class="align-items-center">
+                    <button type="button" class="btn btn-outline-danger mb-3 shadow"  data-bs-toggle="collapse" href= "#dar-baja-proveedor" role= "button" aria-expanded="false" aria-controls="dar-baja-proveedor">Dar de Baja</button>
+                    <section id= "dar-baja-proveedor" class= "collapse">
+                        <label class= "text-start fs-3 p-1">Seleccion el Proveedor a Dar de Baja</label>
+                        <form id= "dar-baja-form" action= "dar_baja_proveedor.php" method= "POST" class= "align-items-center">
                             <div class="col my-2">
-                                <select class="form-select" name="user_id" aria-label="Default select example">
+                                <select class="form-select" name= "user_id" aria-label="Default select example">
                                     <option selected>Proveedor...</option>
-                                    <?php
+                                    <?php 
                                     /* Query para obtener el Id y el Nombre de los proveedores */
                                     $query = "SELECT ID_Proveedor, Nombre FROM Proveedores;";
                                     $result = $conn->query($query);
@@ -302,15 +305,130 @@ header("Expires: 0"); // Proxies
                                             $proveedores[] = $proveedor;
                                         }
                                     }
-                                    foreach ($proveedores as $proveedor) {
-                                        echo '<option value=' . $proveedor["ID_Proveedor"] . '>' . $proveedor["ID_Proveedor"] . ' - ' . $proveedor["Nombre"] . '</option>';
+                                    foreach($proveedores as $proveedor)
+                                    {
+                                        echo '<option value='.$proveedor["ID_Proveedor"].'>'.$proveedor["ID_Proveedor"].' - '.$proveedor["Nombre"].'</option>';
                                     }
                                     ?>
                                 </select>
-                                <button class="btn btn-primary btn-lg m-2 w-25">Eliminar</button>
-                            </div>
+                                <button class= "btn btn-primary btn-lg m-2 w-25">Eliminar</button>
+                            </div> 
                         </form>
                     </section>
+                    <!-- Comprar Inventario -->
+                    <button type="button" class="btn btn-outline-info mb-3 shadow"  data-bs-toggle="collapse" href= "#comprar-inventario" role= "button" aria-expanded="false" aria-controls="comprar-inventario">Comprar Inventario</button>
+                    <section id= "comprar-inventario" class= "collapse fade">
+                        <label class= "text-start fs-3 p-1">Seleccione el proveedor, Inventario y Cantidad a Comprar</label>
+                        <form id= "comprar-inventario" action= "comprar_inventario.php" method= "POST">
+                            <input id="comprar-user-id" name= "user_id" type="hidden">
+                            <input name= "action" type="hidden" value="1">
+                            <div id="container-container-3" class="text-center">
+                                <div class="row row-cols-3">
+                                    <div class="col my-2">
+                                        <select id="select-proveedor-comprar" name="" class="form-select" aria-label="Default select example">
+                                            <option selected>Producto...</option>
+                                            <?php 
+                                                foreach($proveedores as $proveedor)
+                                                {
+                                                    echo '<option value="'.$proveedor["ID_Proveedor"].'">'.$proveedor["ID_Proveedor"].' - '.$proveedor["Nombre"].'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col my-2">
+                                        <label>Cantidad</label>
+                                    </div>
+                                    <div class="col my-2">
+                                        <label>Precio Unitario</label>
+                                    </div>
+                                </div>
+                                <div id="comprar-select-section" class="row row-cols-3 invisible">
+                                    <div class="col my-2">
+                                        <select name="id-producto[]" class="form-select" aria-label="Default select example">
+                                            <option selected>Producto...</option>
+                                            <!-- Insert the options -->
+                                        </select>
+                                    </div>
+                                    <div class="col my-2">
+                                        <input name= "cantidad-producto[]" type="number" min= "0" max= "9999" oninput="validateInput(this)">
+                                    </div>
+                                    <div class="col my-2">
+                                        <input name= "precio-producto[]" type="number" min= "0" max= "99999" oninput="validateInput2(this)">
+                                    </div>
+                                </div>
+                                <div id="comprar-button-section" class="row row-cols-3 invisible">
+                                    <div class="col my-2">
+                                        <button id="comprar-add-product-bttn" type="button" class="btn btn-success">Añadir Producto</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class= "btn btn-primary btn-lg m-2 w-25">Comprar</button>
+                        </form>
+                    </section>
+                    <!-- Consultar Compras -->
+                    <button type="button" class="btn btn-outline-secondary mb-3 shadow"  data-bs-toggle="collapse" href= "#consultar-comprar" role= "button" aria-expanded="false" aria-controls="consultar-comprar">Consultar Compras</button>
+                    <section id= "consultar-comprar" class= "collapse fade">
+                        <label class= "text-start fs-3 p-1">Consultar las Compras Realizadas</label>
+                        <table class= "table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID de Compra</th>
+                                    <th scope="col">Nombre del Proveedor</th>
+                                    <th scope="col">Total (MX)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    $query= "
+                                            SELECT P.Nombre,C.ID_Compras,C.ID_Proveedor,C.Total 
+                                            FROM Compras AS C 
+                                            INNER JOIN Proveedores AS P
+                                            ON C.ID_Proveedor = P.ID_Proveedor;
+                                        ";
+                                    $result= $conn->query($query) or die(mysqli_error($conn));
+                                    if($result->num_rows > 0)
+                                    {
+                                        while($row= $result->fetch_assoc())
+                                        {
+                                            echo "<tr><td>".$row["ID_Compras"]."</td><td>".$row["Nombre"]."</td><td>".$row["Total"]."</td></tr>";
+                                        }
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
+                    </section>
+                    <!-- Consultar Ventas -->
+                    <button type="button" class="btn btn-outline-secondary mb-3 shadow"  data-bs-toggle="collapse" href= "#consultar-ventas" role= "button" aria-expanded="false" aria-controls="consultar-ventas">Consultar Ventas</button>
+                    <section id= "consultar-ventas" class= "collapse fade">
+                        <label class= "text-start fs-3 p-1">Consultar las Ventas Realizadas</label>
+                        <table class= "table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID de Venta</th>
+                                    <th scope="col">Nombre del Cliente</th>
+                                    <th scope="col">Total (MX)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    $query= "
+                                            SELECT V.ID_Venta,V.Total,U.Nombre,U.Apellido,U.ID_Usuario 
+                                            FROM Venta AS V 
+                                            INNER JOIN Usuarios AS U
+                                            ON V.ID_Usuario = U.ID_Usuario;
+                                        ";
+                                    $result= $conn->query($query) or die(mysqli_error($conn));
+                                    if($result->num_rows > 0)
+                                    {
+                                        while($row= $result->fetch_assoc())
+                                        {
+                                            echo "<tr><td>".$row["ID_Compras"]."</td><td>".$row["Nombre"]."</td><td>".$row["Total"]."</td></tr>";
+                                        }
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
+                    </section>                   
                 </div>
             </div>
         </div>
@@ -344,11 +462,10 @@ header("Expires: 0"); // Proxies
     </footer>
     <script src="js/admin.js"></script>
 </body>
-
 </html>
 
 <?php
 
-// Close connection
-$conn->close();
+    // Close connection
+    $conn->close();
 ?>
