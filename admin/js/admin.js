@@ -139,9 +139,8 @@ function validateInput2(input) {
 }
 
 
-
 /*
-    Query to consult the products based on the selected proveedor
+    Query to consult the products based on the selected proveedor (Comprar Inventario)
 */
 document.getElementById("select-proveedor-comprar").addEventListener("change", (e)=>{
     // Get the selected user ID
@@ -166,6 +165,16 @@ document.getElementById("select-proveedor-comprar").addEventListener("change", (
             while (clonedSelectInput.options.length > 0) {
                 clonedSelectInput.remove(0); // Remove all options
             }
+
+            // Add the 'Producto...' option
+            const newOption = document.createElement("option");
+            // Set the text content and attributes
+            newOption.textContent = "Producto...";
+            newOption.selected = true;
+            // Add the new option to the select element
+            clonedSelectInput.appendChild(newOption);
+
+            // Add the products that the proveedor supply
             const userInfoIDs = userInfo.map(product => product.ID_Producto); // Extract ID_Producto values
             Array.from(originalSelectInput.options).forEach(option => {
                 if (userInfoIDs.includes(option.value)) {

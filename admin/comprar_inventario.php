@@ -20,6 +20,11 @@ if(isset($_POST["action"]) && isset($_POST["user_id"]))
 
         // Iterate through the product IDs
         foreach ($idProductos as $index => $id) {
+            if (!is_int($id))
+            {
+                continue;
+            }
+
             // Check if the product ID has already been processed
             if (!in_array($id, $uniqueIds)) {
                 // Add to unique IDs and the filtered arrays
@@ -29,34 +34,39 @@ if(isset($_POST["action"]) && isset($_POST["user_id"]))
                 $filteredPrecio[] = $precioProductos[$index];
             }
         }
-        // Consult the last ID
-        $query= "SELECT MAX(ID_Compras) FROM Compras";
-        $result= $conn->query($query) or die(mysqli_error($conn));
-        $lastID= ($result->num_rows > 0)? $result->fetch_assoc()["MAX(ID_Compras)"] + 1 : 0;
 
-        // Compute the total
-        $total= 0;
-        foreach ($filteredIds as $index => $value) {
-            $total= $total + ($filteredCantidad[$index] * $filteredPrecio[$index]);
-        }
+        if(!empty($filteredIds))
+        {
+            echo "inside";
+            // Consult the last ID
+            $query= "SELECT MAX(ID_Compras) FROM Compras";
+            $result= $conn->query($query) or die(mysqli_error($conn));
+            $lastID= ($result->num_rows > 0)? $result->fetch_assoc()["MAX(ID_Compras)"] + 1 : 0;
 
-        // Register the purchased
-        $query= "INSERT IGNORE INTO Compras(ID_Compras,ID_Proveedor,Total) VALUES ($lastID,$proveedor_id,$total);"; 
-        $conn->query($query) or die(mysqli_error($conn));
+            // Compute the total
+            $total= 0;
+            foreach ($filteredIds as $index => $value) {
+                $total= $total + ($filteredCantidad[$index] * $filteredPrecio[$index]);
+            }
 
-        // Insert the purchased products
-        $query= "INSERT INTO Detalle_Compras (ID_Producto,ID_Compras,Cantidad,Precio) VALUES ";
-        foreach ($filteredIds as $index => $value) {
-            $query= $query . "($value,$lastID,$filteredCantidad[$index],$filteredPrecio[$index]),";
-        }
-        $query= substr($query,0,-1);
-        $query= $query.";";
-        $conn->query($query) or die(mysqli_error($conn));
-
-        // Update the stock
-        foreach ($filteredIds as $index => $value) {
-            $query= "UPDATE Productos SET Stock=Stock+$filteredCantidad[$index] WHERE ID_Producto=$value;";
+            // Register the purchased
+            $query= "INSERT IGNORE INTO Compras(ID_Compras,ID_Proveedor,Total) VALUES ($lastID,$proveedor_id,$total);"; 
             $conn->query($query) or die(mysqli_error($conn));
+
+            // Insert the purchased products
+            $query= "INSERT INTO Detalle_Compras (ID_Producto,ID_Compras,Cantidad,Precio) VALUES ";
+            foreach ($filteredIds as $index => $value) {
+                $query= $query . "($value,$lastID,$filteredCantidad[$index],$filteredPrecio[$index]),";
+            }
+            $query= substr($query,0,-1);
+            $query= $query.";";
+            $conn->query($query) or die(mysqli_error($conn));
+
+            // Update the stock
+            foreach ($filteredIds as $index => $value) {
+                $query= "UPDATE Productos SET Stock=Stock+$filteredCantidad[$index] WHERE ID_Producto=$value;";
+                $conn->query($query) or die(mysqli_error($conn));
+            }   
         }
 
         header("Location: admin.php");
