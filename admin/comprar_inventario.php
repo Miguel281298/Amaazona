@@ -20,9 +20,16 @@ if(isset($_POST["action"]) && isset($_POST["user_id"]))
 
         // Iterate through the product IDs
         foreach ($idProductos as $index => $id) {
-            if (!is_int($id))
+            if (!is_numeric($id))
             {
                 continue;
+            }
+
+            if(empty($id) || empty($cantidadProductos[$index]) || empty($precioProductos[$index]))
+            {
+                echo "Los datos no estan completos";
+                header("Location: admin.php");
+                exit();
             }
 
             // Check if the product ID has already been processed
@@ -37,7 +44,6 @@ if(isset($_POST["action"]) && isset($_POST["user_id"]))
 
         if(!empty($filteredIds))
         {
-            echo "inside";
             // Consult the last ID
             $query= "SELECT MAX(ID_Compras) FROM Compras";
             $result= $conn->query($query) or die(mysqli_error($conn));
