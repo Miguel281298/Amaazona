@@ -79,6 +79,20 @@ document.getElementById("select-proveedor-input").addEventListener("change", fun
                         element.value= userInfo[element.id];    // Insert the data in the input
                     }
                 });
+                
+                /*
+                    Removeing all the select inputs in the container (container-container-2)
+                */
+                // Get the parent container
+                const containerContainer = document.getElementById('container-container-2');
+                // Get all div elements inside the container
+                const divs = containerContainer.querySelectorAll('div');
+                // Loop through each div and check if it contains a select element
+                divs.forEach(div => {
+                    if (div.querySelector('select')) { // Check if there's a select inside the div
+                        div.remove(); // Remove the div if it contains a select
+                    }
+                });
 
                 /* 
                     Insert the products of the Proveedor (select input)
@@ -92,9 +106,6 @@ document.getElementById("select-proveedor-input").addEventListener("change", fun
                     clonedSelectContainer.id = '';
                     // Pre-select an option
                     clonedSelectContainer.querySelector("select").value= element["ID_Producto"];
-                
-                    // Get the parent container
-                    const containerContainer = document.getElementById('container-container-2');
                 
                     // Get the button to insert the new element before
                     const addButton = document.getElementById('add-product-bttn-2');

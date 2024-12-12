@@ -22,7 +22,6 @@ header("Expires: 0"); // Proxies
 </head>
 
 <body>
-
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
