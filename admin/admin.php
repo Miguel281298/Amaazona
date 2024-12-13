@@ -369,70 +369,7 @@ header("Expires: 0"); // Proxies
                             <button class= "btn btn-primary btn-lg m-2 w-25">Comprar</button>
                         </form>
                     </section>
-                    <!-- Consultar Compras -->
-                    <button type="button" class="btn btn-outline-secondary mb-3 shadow"  data-bs-toggle="collapse" href= "#consultar-comprar" role= "button" aria-expanded="false" aria-controls="consultar-comprar">Consultar Compras</button>
-                    <section id= "consultar-comprar" class= "collapse fade">
-                        <label class= "text-start fs-3 p-1">Consultar las Compras Realizadas</label>
-                        <table class= "table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID de Compra</th>
-                                    <th scope="col">Nombre del Proveedor</th>
-                                    <th scope="col">Total (MX)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $query= "
-                                            SELECT P.Nombre,C.ID_Compras,C.ID_Proveedor,C.Total 
-                                            FROM Compras AS C 
-                                            INNER JOIN Proveedores AS P
-                                            ON C.ID_Proveedor = P.ID_Proveedor;
-                                        ";
-                                    $result= $conn->query($query) or die(mysqli_error($conn));
-                                    if($result->num_rows > 0)
-                                    {
-                                        while($row= $result->fetch_assoc())
-                                        {
-                                            echo "<tr><td>".$row["ID_Compras"]."</td><td>".$row["Nombre"]."</td><td>$ ".$row["Total"]."</td></tr>";
-                                        }
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-                    </section>
-                    <!-- Consultar Ventas -->
-                    <button type="button" class="btn btn-outline-secondary mb-3 shadow"  data-bs-toggle="collapse" href= "#consultar-ventas" role= "button" aria-expanded="false" aria-controls="consultar-ventas">Consultar Ventas</button>
-                    <section id= "consultar-ventas" class= "collapse fade">
-                        <label class= "text-start fs-3 p-1">Consultar las Ventas Realizadas</label>
-                        <table class= "table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID de Venta</th>
-                                    <th scope="col">Nombre del Cliente</th>
-                                    <th scope="col">Total (MX)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $query= "
-                                            SELECT V.ID_Venta,V.Total,U.Nombre,U.Apellido,U.ID_Usuario 
-                                            FROM Venta AS V 
-                                            INNER JOIN Usuarios AS U
-                                            ON V.ID_Usuario = U.ID_Usuario;
-                                        ";
-                                    $result= $conn->query($query) or die(mysqli_error($conn));
-                                    if($result->num_rows > 0)
-                                    {
-                                        while($row= $result->fetch_assoc())
-                                        {
-                                            echo "<tr><td>".$row["ID_Venta"]."</td><td>".$row["Nombre"]."</td><td>$ ".$row["Total"]."</td></tr>";
-                                        }
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-                    </section>                   
+                                       
                 </div>
             </div>
         </div>

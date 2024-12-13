@@ -146,16 +146,32 @@ $articulos = 0;
                     <div class="col" style="padding-left:0;">ARTÍCULOS: <span class="articulos"><?= $articulos ?></span></div>
 
                 </div>
-                <form>
+                <form method="POST" action="">
                     <p>DIRECCIÓN DE ENVÍO</p>
-                    <select id="envio" onchange="updateTotal()">
-                        <option value="99">Envío estándar - 99.00 MXN</option>
-                        <option value="159">Envío rápido - 159.00 MXN</option>
+                    <select>
+                        <option disabled selected>-- Seleccione una dirección --</option>
+                        <?php
+                        $sql = "SELECT * FROM Direcciones_Entrega WHERE ID_Usuario = $usuario_id";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($direccion = $result->fetch_assoc()) {
+                                echo '<option value="' . $direccion['ID_Direccion_Entrega'] . '">' . $direccion['Calle'] . " #" . $direccion['Num_Exterior'] . ', ' . $direccion['Fraccionamiento_Colonia'] . ' </option>';
+                            }
+                        }
+                        ?>
                     </select>
                     <p>MÉTODO DE PAGO</p>
                     <select>
-                        <option class="text-muted">Tarjeta 1</option>
-                        <option class="text-muted">Tarjeta 2</option>
+                        <option disabled selected>-- Seleccione una Tarjeta --</option>
+                        <?php
+                        $sql = "SELECT * FROM Metodos_Pago WHERE ID_Usuario = $usuario_id";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($metodo = $result->fetch_assoc()) {
+                                echo '<option value="' . $metodo['ID_Metodo_Pago'] . '">' .  $metodo['Numero_Tarjeta'] . ' </option>';
+                            }
+                        }
+                        ?>
                     </select>
                 </form>
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
