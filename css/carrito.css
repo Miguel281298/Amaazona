@@ -188,3 +188,23 @@ a:hover {
 .boton:hover {
   background-color: #0954c5;
 }
+
+.nombre, .cant_prod {
+  font-size: 20px;
+}
+
+.total {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.titulos{
+  display: flex;
+  justify-content: space-around;
+}
+
+.titulos label {
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+}

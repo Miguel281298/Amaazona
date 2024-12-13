@@ -25,7 +25,7 @@ header("Expires: 0"); // Proxies
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a href="tienda.php" class="navbar-brand" style="padding-left: 20px">
+                <a href="admin.php" class="navbar-brand" style="padding-left: 20px">
                     <img src="../img/amaazona.png" alt="Bootstrap" width="100" height="30">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,8 +43,8 @@ header("Expires: 0"); // Proxies
                                 Administrador
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Mis Compras</a></li>
-                                <li><a class="dropdown-item" href="#">Mis Ventas</a></li>
+                                <li><a class="dropdown-item" href="compras.php">Mis Compras</a></li>
+                                <li><a class="dropdown-item" href="ventas.php">Mis Ventas</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -91,8 +91,10 @@ header("Expires: 0"); // Proxies
                                 echo '<input type="hidden" name="id" value="'. $categoria['ID_Categoria'] .'">';
                                 echo '<img src="../img/categorias/' . $categoria['ID_Categoria'] . '.jpg" alt="">';
                                 echo '<p>' . $categoria['Nombre'] . '</p>';
+                                echo '<div>';
                                 echo '<a class="boton btn-primary editar" href="categoria.php?ID=' . $categoria['ID_Categoria'] . '">Editar</a>';
                                 echo '<input type="submit" class="boton btn-danger eliminar" value="Eliminar">';
+                                echo '</div>';
                                 echo '</div>';
                                 echo '</form>';
                             }
@@ -132,8 +134,10 @@ header("Expires: 0"); // Proxies
                                 echo '<p>' . $producto['Nombre'] . '</p>';
                                 echo '<p> $' . $producto['Precio'] . '</p>';
                                 echo '<p>' . $producto['Stock'] . ' Pzas </p>';
+                                echo '<div>';
                                 echo '<a class="boton btn-primary editar" href="producto.php?ID=' . $producto['ID_Producto'] . '">Editar</a>';
                                 echo '<input type="submit" class="boton btn-danger eliminar" value="Eliminar">';
+                                echo '</div>';
                                 echo '</div>';
                                 echo '</form>';
                             }
@@ -390,7 +394,7 @@ header("Expires: 0"); // Proxies
                                     {
                                         while($row= $result->fetch_assoc())
                                         {
-                                            echo "<tr><td>".$row["ID_Compras"]."</td><td>".$row["Nombre"]."</td><td>".$row["Total"]."</td></tr>";
+                                            echo "<tr><td>".$row["ID_Compras"]."</td><td>".$row["Nombre"]."</td><td>$ ".$row["Total"]."</td></tr>";
                                         }
                                     }
                                 ?>
@@ -422,7 +426,7 @@ header("Expires: 0"); // Proxies
                                     {
                                         while($row= $result->fetch_assoc())
                                         {
-                                            echo "<tr><td>".$row["ID_Compras"]."</td><td>".$row["Nombre"]."</td><td>".$row["Total"]."</td></tr>";
+                                            echo "<tr><td>".$row["ID_Venta"]."</td><td>".$row["Nombre"]."</td><td>$ ".$row["Total"]."</td></tr>";
                                         }
                                     }
                                 ?>

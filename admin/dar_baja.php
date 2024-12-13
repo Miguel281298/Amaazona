@@ -12,6 +12,7 @@ if ($opcion == 1) {
 
     if ($result) {
         echo "Se elimino la categoria correctamente";
+        unlink('../img/categorias/'.$id_categoria.'.jpg');
     } else {
         echo mysqli_error($conn);
     }
@@ -24,6 +25,7 @@ if ($opcion == 1) {
 
     if ($result) {
         echo "Se elimino el producto correctamente";
+        unlink('../img/productos/'.$id_producto.'.png');
     } else {
         echo mysqli_error($conn);
     }
