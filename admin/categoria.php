@@ -120,8 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ?>
                 </div>
             </fieldset>
-            <input name="tipo" type="hidden" value="<?php echo isset($_GET['ID']) ? 'U' : 'I' ?>">
-            <input name="id" type="hidden" value="<?php echo $id_categoria ?>">
             <input class="boton" type="submit" value="Guardar Categoria" onclick="">
         </form>
     </main>

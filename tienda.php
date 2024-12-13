@@ -56,7 +56,7 @@ include 'conexion.php'; // Incluye tu conexión a la base de datos
                                 <?php echo $nombre_usuario; ?>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                                <li><a class="dropdown-item" href="perfil.php">Mi perfil</a></li>
                                 <li><a class="dropdown-item" href="#">Mis compras</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
