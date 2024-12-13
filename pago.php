@@ -92,6 +92,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <input type="submit" value="Guardar" class="boton">
         </form>
+        <form action="dar_baja.php" method="POST">
+        <?php if (isset($id)) { ?>
+            <input type="hidden" name="id" value="<?= $id; ?>">
+            <input type="hidden" name="opcion" value="2">
+            <input type="submit" value="Eliminar metodo de pago" class="boton eliminar">
+        <?php } ?>
+        </form>
     </main>
 </body>
 
