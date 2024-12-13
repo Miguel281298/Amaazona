@@ -146,9 +146,9 @@ $articulos = 0;
                     <div class="col" style="padding-left:0;">ARTÍCULOS: <span class="articulos"><?= $articulos ?></span></div>
 
                 </div>
-                <form method="POST" action="">
+                <form method="POST" action="compra.php">
                     <p>DIRECCIÓN DE ENVÍO</p>
-                    <select>
+                    <select name="direccion">
                         <option disabled selected>-- Seleccione una dirección --</option>
                         <?php
                         $sql = "SELECT * FROM Direcciones_Entrega WHERE ID_Usuario = $usuario_id";
@@ -161,7 +161,7 @@ $articulos = 0;
                         ?>
                     </select>
                     <p>MÉTODO DE PAGO</p>
-                    <select>
+                    <select name="metodo_pago">
                         <option disabled selected>-- Seleccione una Tarjeta --</option>
                         <?php
                         $sql = "SELECT * FROM Metodos_Pago WHERE ID_Usuario = $usuario_id";
@@ -173,12 +173,13 @@ $articulos = 0;
                         }
                         ?>
                     </select>
-                </form>
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                     <div class="col">TOTAL</div>
                     <div class="col text-right total"><?= number_format($total, 2) ?> MXN</div>
                 </div>
-                <button class="boton">PAGAR</button>
+                <input type="hidden" name="total" value="<?= $total; ?>">
+                <input type="submit" class="boton" value="PAGAR">
+                </form>
             </div>
         </div>
     </div>
