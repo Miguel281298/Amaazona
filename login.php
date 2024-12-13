@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['nombre'] = $row['Nombre'];
                 $_SESSION['apellido'] = $row['Apellido'];
                 $_SESSION['ID_Usuario'] = $row['ID_Usuario'];
+                $_SESSION['correo'] = $row['Correo'];
                 header("Location: tienda.php"); // Redirigir a la página principal
             } else {
                 echo "Contraseña incorrecta.";
