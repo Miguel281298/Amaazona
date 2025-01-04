@@ -4,7 +4,7 @@ include 'conexion.php'; // Asegúrate de que este archivo contiene la conexión 
 
 // Verifica si el usuario ha iniciado sesión
 if (!isset($_SESSION['ID_Usuario'])) {
-    header("Location: index_login.php");
+    header("Location: ./");
     exit();
 }
 
@@ -146,9 +146,9 @@ $articulos = 0;
                     <div class="col" style="padding-left:0;">ARTÍCULOS: <span class="articulos"><?= $articulos ?></span></div>
 
                 </div>
-                <form method="POST" action="">
+                <form method="POST" action="compra.php">
                     <p>DIRECCIÓN DE ENVÍO</p>
-                    <select>
+                    <select name="direccion">
                         <option disabled selected>-- Seleccione una dirección --</option>
                         <?php
                         $sql = "SELECT * FROM Direcciones_Entrega WHERE ID_Usuario = $usuario_id";
@@ -161,7 +161,7 @@ $articulos = 0;
                         ?>
                     </select>
                     <p>MÉTODO DE PAGO</p>
-                    <select>
+                    <select name="metodo_pago">
                         <option disabled selected>-- Seleccione una Tarjeta --</option>
                         <?php
                         $sql = "SELECT * FROM Metodos_Pago WHERE ID_Usuario = $usuario_id";
@@ -173,12 +173,13 @@ $articulos = 0;
                         }
                         ?>
                     </select>
+                    <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                        <div class="col">TOTAL</div>
+                        <div class="col text-right total"><?= number_format($total, 2) ?> MXN</div>
+                    </div>
+                    <input type="hidden" name="total" value="<?= $total; ?>">
+                    <input type="submit" class="boton" value="PAGAR">
                 </form>
-                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                    <div class="col">TOTAL</div>
-                    <div class="col text-right total"><?= number_format($total, 2) ?> MXN</div>
-                </div>
-                <button class="boton">PAGAR</button>
             </div>
         </div>
     </div>
@@ -213,7 +214,7 @@ $articulos = 0;
 
     <script>
         function adjustQuantity(button, amount, productId, stock) {
-            let quantityInput = button.parentElement.querySelector('.cantidad-input');
+            let quantityInput = button.parentElement.parentElement.querySelector('.cantidad-input');
             let quantity = parseInt(quantityInput.value) + amount;
             quantity = Math.min(Math.max(1, quantity), stock); // Limita entre 1 y stock
             quantityInput.value = quantity;
@@ -226,7 +227,7 @@ $articulos = 0;
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
                     if (response.success) {
-                        let subtotalElement = button.parentElement.parentElement.querySelector('.subtotal');
+                        let subtotalElement = button.parentElement.parentElement.parentElement.querySelector('.subtotal');
                         subtotalElement.innerText = 'Subtotal: ' + response.newSubtotal + ' MXN';
                         updateTotal();
                     } else {
@@ -251,11 +252,7 @@ $articulos = 0;
                 total += subtotal;
             });
 
-            // Obtiene el costo del envío seleccionado
-            const envio = parseFloat(document.getElementById('envio').value);
-
-            // Suma el costo del envío al total
-            total += envio;
+            //console.log(total);
 
             // Actualiza los elementos en la página
             document.querySelector('.total').innerText = total.toFixed(2) + ' MXN';

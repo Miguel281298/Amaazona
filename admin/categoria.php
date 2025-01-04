@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ?>
                 </div>
             </fieldset>
-            <input class="boton" type="submit" value="Guardar Categoria" onclick="">
+            <input class="boton" type="submit" value="Guardar" onclick="">
         </form>
     </main>
 </body>

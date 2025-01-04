@@ -12,7 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Consulta para insertar el nuevo usuario en la base de datos
     $sql = "INSERT INTO Usuarios (Nombre, Apellido, Correo, Password) VALUES ('$nombre', '$apellido', '$correo', '$password')";
 
-    if ($conn->query($sql) === TRUE) {
+    try {
+        $conn->query($sql);
         // Iniciar sesión automáticamente al registrar el usuario
         $_SESSION['nombre'] = $nombre;
         $_SESSION['apellido'] = $apellido;
@@ -23,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         alert("Te has registrado exitosamente");
         window.location.href = "tienda.php";
         </script>';
-    } else {
+    } catch (Exception $e) {
         echo '<script>
         alert("Algo ha salido mal, inténtalo de nuevo.");
         window.location.href = "index_login.php";

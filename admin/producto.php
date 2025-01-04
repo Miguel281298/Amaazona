@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </fieldset>
             <input name="tipo" type="hidden" value="<?php echo isset($_GET['ID']) ? 'U' : 'I' ?>">
             <input name="id" type="hidden" value="<?php echo $id_producto ?>">
-            <input class="boton" type="submit" value="Guardar Producto">
+            <input class="boton" type="submit" value="Guardar">
         </form>
     </main>
 
