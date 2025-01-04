@@ -173,12 +173,21 @@ $articulos = 0;
                         }
                         ?>
                     </select>
+<<<<<<< HEAD
                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                         <div class="col">TOTAL</div>
                         <div class="col text-right total"><?= number_format($total, 2) ?> MXN</div>
                     </div>
                     <input type="hidden" name="total" value="<?= $total; ?>">
                     <input type="submit" class="boton" value="PAGAR">
+=======
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col">TOTAL</div>
+                    <div class="col text-right total"><?= number_format($total, 2) ?> MXN</div>
+                </div>
+                <input type="hidden" name="total" value="<?= $total; ?>">
+                <input type="submit" class="boton" value="PAGAR">
+>>>>>>> 5eed61a4d4e85571766fd97c4bd216cc98152e4a
                 </form>
             </div>
         </div>

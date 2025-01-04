@@ -2,7 +2,11 @@
 session_start();
 include 'conexion.php';
 if (!isset($_SESSION['ID_Usuario'])) {
+<<<<<<< HEAD
     header("Location: ./");
+=======
+    header("Location: index_login.php");
+>>>>>>> 5eed61a4d4e85571766fd97c4bd216cc98152e4a
     exit();
 }
 $usuario_id = $_SESSION['ID_Usuario'];
@@ -38,6 +42,7 @@ $total = $_POST['total'];
 $metodo_pago = $_POST['metodo_pago'];
 $direccion = $_POST['direccion'];
 
+<<<<<<< HEAD
 if (!$metodo_pago) {
     echo '<script> alert("Selecciona un metodo de pago");</script>';
     echo '<script> window.location.href = "carrito.php";</script>';
@@ -50,6 +55,8 @@ if (!$direccion) {
     exit();
 }
 
+=======
+>>>>>>> 5eed61a4d4e85571766fd97c4bd216cc98152e4a
 $sql = "SELECT * FROM Direcciones_Entrega WHERE ID_Direccion_Entrega = $direccion";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
